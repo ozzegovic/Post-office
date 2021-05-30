@@ -35,7 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,18 +62,103 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="ViewModel\SkladisteViewModel.cs" />
+    <Compile Include="View\FinansijskaUslugaView.xaml.cs">
+      <DependentUpon>FinansijskaUslugaView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PaketView.xaml.cs">
+      <DependentUpon>PaketView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PismoView.xaml.cs">
+      <DependentUpon>PismoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PostanskaUslugaView.xaml.cs">
+      <DependentUpon>PostanskaUslugaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PostarView.xaml.cs">
+      <DependentUpon>PostarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PostaView.xaml.cs">
+      <DependentUpon>PostaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PostNetView.xaml.cs">
+      <DependentUpon>PostNetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RadnikView.xaml.cs">
+      <DependentUpon>RadnikView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SkladisteView.xaml.cs">
+      <DependentUpon>SkladisteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SluzbenikView.xaml.cs">
+      <DependentUpon>SluzbenikView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UplatnicaView.xaml.cs">
+      <DependentUpon>UplatnicaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VML\ViewModelLocator.cs" />
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FinansijskaUslugaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PismoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PostanskaUslugaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PostarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PostaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PostNetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RadnikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SkladisteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SluzbenikView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UplatnicaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,6 +178,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DatabaseModel.FinansijskaUsluga.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Paket.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Pismo.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Posta.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.PostaDbContainer.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.PostanskaUsluga.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Postar.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.PostNet.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Radnik.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Skladiste.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Sluzbenik.datasource" />
+    <None Include="Properties\DataSources\DatabaseModel.Uplatnica.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,5 +199,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseModel\DatabaseModel.csproj">
+      <Project>{285a5e3e-0270-4890-be80-9110794072a3}</Project>
+      <Name>DatabaseModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

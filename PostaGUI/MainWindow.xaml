@@ -1,12 +1,74 @@
-﻿<Window x:Class="PostaGUI.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PostaGUI"
+        xmlns:DatabaseModel="clr-namespace:DatabaseModel;assembly=DatabaseModel" x:Class="PostaGUI.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:views="clr-namespace:PostaGUI.View"
+        Title="MainWindow" Width="Auto"  Height="Auto" SizeToContent="WidthAndHeight">
+
     <Grid>
-        
+        <Grid>
+            <TabControl HorizontalAlignment="Left" Width="Auto"  Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top" SelectedIndex="{Binding TabControlSelectedIndex}" SelectedItem="{Binding TabControlSelectedIndex}" SelectedValue="{Binding TabControlSelectedIndex}">
+                <TabItem Header="Skladista">
+                    <Grid>
+                        <views:SkladisteView x:Name="Skladista"></views:SkladisteView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Poste" >
+                    <Grid>
+                        <views:PostaView x:Name="Poste"></views:PostaView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Radnici">
+                    <Grid>
+                        <views:RadnikView x:Name="Radnici"></views:RadnikView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Sluzbenici">
+                    <Grid>
+                        <views:SluzbenikView x:Name="Sluzbenici"></views:SluzbenikView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Postari">
+                    <Grid>
+                        <views:PostarView x:Name="Postari"></views:PostarView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Postanske usluge">
+                    <Grid>
+                        <views:PostanskaUslugaView x:Name="PostanskeUsluge"  VerticalAlignment="Top"></views:PostanskaUslugaView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Paketi">
+                    <Grid>
+                        <views:PaketView x:Name="Paketi"></views:PaketView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Pisma">
+                    <Grid>
+                        <views:PismoView x:Name="Pisma"></views:PismoView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Finansijske usluge">
+                    <Grid>
+                        <views:FinansijskaUslugaView x:Name="FinansijskeUsluge"></views:FinansijskaUslugaView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Uplatnice">
+                    <Grid>
+                        <views:UplatnicaView x:Name="Uplatnice"></views:UplatnicaView>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="PostNet">
+                    <Grid>
+                        <views:PostNetView x:Name="Postnetovi"></views:PostNetView>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
     </Grid>
 </Window>
