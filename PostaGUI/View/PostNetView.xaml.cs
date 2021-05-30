@@ -21,7 +21,8 @@ namespace PostaGUI.View
     /// </summary>
     public partial class PostNetView : UserControl
     {
-        PostaDbContainer _context = new PostaDbContainer();
+        PostaDbContainer _context;
+        CollectionViewSource postNetViewSource;
 
         public PostNetView()
         {
@@ -36,7 +37,7 @@ namespace PostaGUI.View
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 //Load your data here and assign the result to the CollectionViewSource.
-                System.Windows.Data.CollectionViewSource postNetViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["postNetViewSource"];
+                postNetViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["postNetViewSource"];
 
                 // Load is an extension method on IQueryable,
                 // defined in the System.Data.Entity namespace.
@@ -44,12 +45,111 @@ namespace PostaGUI.View
                 // similar to ToList but without creating a list.
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
+                _context = new PostaDbContainer();
                 _context.PostNets.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
                 postNetViewSource.Source = _context.PostNets.Local;
             }
+        }
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = postNetViewSource.View.CurrentItem as PostNet;
+
+            var postnet = (from c in _context.PostNets
+                             where c.ID_Uplate == cur.ID_Uplate
+                             select c).FirstOrDefault();
+
+            if (postnet != null)
+            {
+                try
+                {
+                    _context.PostNets.Remove(postnet);
+
+                    _context.SaveChanges();
+                    _context.PostNets.Load();
+
+                    postNetViewSource.Source = _context.PostNets.Local;
+                    postNetViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce obrisati postnet uslugu.", "Error");
+                    return;
+                }
+
+            }
+
+
+        }
+        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = postNetViewSource.View.CurrentItem as PostNet;
+
+            var postnet = (from c in _context.PostNets
+                           where c.ID_Uplate == cur.ID_Uplate
+                           select c).FirstOrDefault();
+
+            if (postnet != null)
+            {
+                try
+                {
+                    postnet.BrojTelefona = Convert.ToInt32(brojTelefonaTextBox.Text);
+                    postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
+                    _context.SaveChanges();
+                    _context.PostNets.Load();
+
+                    postNetViewSource.Source = _context.PostNets.Local;
+                    postNetViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce izmeniti postnet uslugu.", "Error");
+                    return;
+                }
+
+            }
+
+
+        }
+        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            PostNet postnet = new PostNet();
+
+            if (postnet != null)
+            {
+                try
+                {
+                    postnet.BrojTelefona = Convert.ToInt32(brojTelefonaTextBox.Text);
+                    postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
+                    _context.PostNets.Add(postnet);
+                    _context.SaveChanges();
+                    _context.PostNets.Load();
+
+                    postNetViewSource.Source = _context.PostNets.Local;
+                    postNetViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce dodati postnet uslugu.", "Error");
+                    return;
+                }
+
+            }
+
         }
     }
 }

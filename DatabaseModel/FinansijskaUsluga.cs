@@ -16,7 +16,7 @@ namespace DatabaseModel
     {
         public int ID_Uplate { get; set; }
         public int SluzbenikJMBG_Radnika { get; set; }
-        public int SluzbenikPostanskiBroj { get; set; }
+        public decimal SluzbenikPostanskiBroj { get; set; }
         public string PrimalacIme { get; set; }
         public string PrimalacPrezime { get; set; }
         public string PosiljalacIme { get; set; }

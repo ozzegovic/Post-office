@@ -4,15 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PostaGUI.View"
-        xmlns:viewModel="clr-namespace:PostaGUI.ViewModel"
         xmlns:DatabaseModel="clr-namespace:DatabaseModel;assembly=DatabaseModel" x:Class="PostaGUI.View.SkladisteView"
         mc:Ignorable="d"
         xmlns:vml="clr-namespace:PostaGUI.VML"
-        vml:ViewModelLocator.AutoHookedUpViewModel="True"
         Height="450" Width="800" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="skladisteViewSource" d:DesignSource="{d:DesignInstance {x:Type DatabaseModel:Skladiste}, CreateList=True}"/>
+        <RoutedUICommand x:Key="DeleteCommand" Text="Izbrisi"/>
+        <RoutedUICommand x:Key="UpdateCommand" Text="Izmeni"/>
+        <RoutedUICommand x:Key="AddCommand" Text="Dodaj"/>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler"/>
+        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler"/>
+        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
+    </UserControl.CommandBindings>
     <Grid DataContext="{StaticResource skladisteViewSource}">
 
         <DataGrid x:Name="skladisteDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,25,30,310" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
@@ -40,13 +46,20 @@
             <TextBox x:Name="brojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Broj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Grad:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox x:Name="gradTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Grad, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Id Skladiste:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="id_SkladisteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Id_Skladiste, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <!--<Label Content="Id Skladiste:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="id_SkladisteTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Id_Skladiste, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>-->
             <Label Content="Posta Postanski Broj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBox x:Name="postaPostanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding PostaPostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Ulica:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
             <TextBox x:Name="ulicaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Ulica, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" Background="Gainsboro" DataContext="{StaticResource skladisteViewSource}">
+
+            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
+            <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>
+            <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80"/>
+        </StackPanel>
+
 
     </Grid>
 </UserControl>

@@ -23,6 +23,7 @@ namespace PostaGUI.View
     {
 
         PostaDbContainer _context = new PostaDbContainer();
+        CollectionViewSource skladistaViewSource;
         public SkladisteView()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace PostaGUI.View
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 //Load your data here and assign the result to the CollectionViewSource.
-                System.Windows.Data.CollectionViewSource skladistaViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["skladisteViewSource"];
+                skladistaViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["skladisteViewSource"];
 
                 // Load is an extension method on IQueryable,
                 // defined in the System.Data.Entity namespace.
@@ -50,7 +51,108 @@ namespace PostaGUI.View
                 skladistaViewSource.Source = _context.Skladista.Local;
             }
         }
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            var cur = skladistaViewSource.View.CurrentItem as Skladiste;
+
+            var skladiste = (from c in _context.Skladista
+                             where c.Id_Skladiste == cur.Id_Skladiste
+                             select c).FirstOrDefault();
+
+            if (skladiste != null)
+            {
+                _context.Skladista.Remove(skladiste);
+                //  context.Customers.Remove(cust);
+            }
+            _context.SaveChanges();
+            skladistaViewSource.View.Refresh();
+
+        }
+        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            var cur = skladistaViewSource.View.CurrentItem as Skladiste;
+
+            var skladiste = (from c in _context.Skladista
+                             where c.Id_Skladiste == cur.Id_Skladiste
+                             select c).FirstOrDefault();
+
+            if (skladiste != null)
+            {
+                skladiste.Grad = gradTextBox.Text;
+                skladiste.Ulica = ulicaTextBox.Text;
+                skladiste.Broj = brojTextBox.Text;
+                if (!String.IsNullOrEmpty(postaPostanskiBrojTextBox.Text))
+                {
+                    int postanskibr = Convert.ToInt32(postaPostanskiBrojTextBox.Text);
+                    var posta = _context.Poste.Any(c => c.PostanskiBroj == postanskibr);
+
+                    if (posta)
+                    {
+                        var p = _context.Poste.Where(c => c.PostanskiBroj == postanskibr).FirstOrDefault();
+                        skladiste.PostaPostanskiBroj = p.PostanskiBroj;
+
+                    }
+                    else
+                    {
+                        skladiste.PostaPostanskiBroj = null;
+
+                    }
+                }
+                else
+                {
+                    skladiste.PostaPostanskiBroj = null;
+                }
+            }
+            _context.SaveChanges();
+            skladistaViewSource.View.Refresh();
+        }
+        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            Skladiste skladiste = new Skladiste();
+            skladiste.Grad = gradTextBox.Text;
+            skladiste.Ulica = ulicaTextBox.Text;
+            skladiste.Broj = brojTextBox.Text;
+            //skladiste moze bez poste, ali ako se ubaci postanski broj, mora da bude taj koji vec postoji
+            if (!String.IsNullOrEmpty(postaPostanskiBrojTextBox.Text))
+            {
+                int postanskibr = Convert.ToInt32(postaPostanskiBrojTextBox.Text);
+                var posta = _context.Poste.Any(c => c.PostanskiBroj == postanskibr);
+
+                if (posta)
+                {
+                    var p = _context.Poste.Where(c => c.PostanskiBroj == postanskibr).FirstOrDefault();
+                    skladiste.PostaPostanskiBroj = p.PostanskiBroj;
+
+                }
+                else
+                {
+                    skladiste.PostaPostanskiBroj = null;
+
+                }
+            }
+            else
+            {
+                skladiste.PostaPostanskiBroj = null;
+            }
+
+            _context.Skladista.Add(skladiste);
+            _context.SaveChanges();
+            skladistaViewSource.View.Refresh();
+
+        }
+
+        public void ClearFields()
+        {
+            gradTextBox.Text = "";
+            ulicaTextBox.Text = "";
+            brojTextBox.Text = "";
+
+            postaPostanskiBrojTextBox.Text = "";
 
 
+        }
     }
 }

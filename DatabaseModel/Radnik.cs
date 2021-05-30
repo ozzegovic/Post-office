@@ -17,7 +17,7 @@ namespace DatabaseModel
         public int JMBG_Radnika { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
-        public int PostaPostanskiBroj { get; set; }
+        public decimal PostaPostanskiBroj { get; set; }
     
         public virtual Postar Postar { get; set; }
         public virtual Posta Posta { get; set; }

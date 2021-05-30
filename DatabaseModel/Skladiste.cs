@@ -21,7 +21,7 @@ namespace DatabaseModel
         }
     
         public int Id_Skladiste { get; set; }
-        public Nullable<int> PostaPostanskiBroj { get; set; }
+        public Nullable<decimal> PostaPostanskiBroj { get; set; }
         public string Grad { get; set; }
         public string Ulica { get; set; }
         public string Broj { get; set; }

@@ -21,7 +21,8 @@ namespace PostaGUI.View
     /// </summary>
     public partial class SluzbenikView : UserControl
     {
-        PostaDbContainer _context = new PostaDbContainer();
+        PostaDbContainer _context;
+        CollectionViewSource sluzbenikViewSource;
 
         public SluzbenikView()
         {
@@ -36,7 +37,7 @@ namespace PostaGUI.View
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 //Load your data here and assign the result to the CollectionViewSource.
-                System.Windows.Data.CollectionViewSource sluzbenikViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["sluzbenikViewSource"];
+                sluzbenikViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["sluzbenikViewSource"];
 
                 // Load is an extension method on IQueryable,
                 // defined in the System.Data.Entity namespace.
@@ -44,12 +45,114 @@ namespace PostaGUI.View
                 // similar to ToList but without creating a list.
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
+                _context = new PostaDbContainer();
                 _context.Sluzbenici.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
                 sluzbenikViewSource.Source = _context.Sluzbenici.Local;
             }
+        }
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = sluzbenikViewSource.View.CurrentItem as Sluzbenik;
+
+            var radnik = (from c in _context.Sluzbenici
+                          where c.JMBG_Radnika == cur.JMBG_Radnika
+                          select c).FirstOrDefault();
+
+            if (radnik != null)
+            {
+                try
+                {
+                    _context.Sluzbenici.Remove(radnik);
+
+                    _context.SaveChanges();
+                    _context.Sluzbenici.Load();
+
+                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    sluzbenikViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce obrisati sluzbenika.", "Error");
+                    return;
+                }
+
+            }
+
+        }
+        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = sluzbenikViewSource.View.CurrentItem as Sluzbenik;
+
+            var radnik = (from c in _context.Sluzbenici
+                          where c.JMBG_Radnika == cur.JMBG_Radnika
+                          select c).FirstOrDefault();
+
+            if (radnik != null)
+            {
+                try
+                {
+
+                    radnik.Odeljenje = odeljenjeTextBox.Text;
+                    
+                    _context.SaveChanges();
+                    _context.Sluzbenici.Load();
+
+                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    sluzbenikViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce izmeniti sluzbenika.", "Error");
+                    return;
+                }
+
+            }
+
+        }
+        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            _context = new PostaDbContainer();
+
+            Sluzbenik sluzbenik = new Sluzbenik();
+            if (sluzbenik != null)
+            {
+                try
+                {
+
+                    sluzbenik.Odeljenje = odeljenjeTextBox.Text;
+                    sluzbenik.JMBG_Radnika =Convert.ToInt32(jMBG_RadnikaTextBox.Text);
+                    sluzbenik.PostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
+                    _context.Sluzbenici.Add(sluzbenik);
+                    _context.SaveChanges();
+                    _context.Sluzbenici.Load();
+
+                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    sluzbenikViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce dodati sluzbenika.", "Error");
+                    return;
+                }
+
+            }
+
+
         }
     }
 }

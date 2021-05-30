@@ -9,7 +9,15 @@
         Height="450" Width="800" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="postarViewSource" d:DesignSource="{d:DesignInstance {x:Type DatabaseModel:Postar}, CreateList=True}"/>
+        <RoutedUICommand x:Key="DeleteCommand" Text="Izbrisi"/>
+        <RoutedUICommand x:Key="UpdateCommand" Text="Izmeni"/>
+        <RoutedUICommand x:Key="AddCommand" Text="Dodaj"/>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler"/>
+        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler"/>
+        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
+    </UserControl.CommandBindings>
     <Grid DataContext="{StaticResource postarViewSource}">
 
         <DataGrid x:Name="postarDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,324" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
@@ -36,6 +44,11 @@
             <Label Content="Postanski Broj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox x:Name="postanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding PostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postarViewSource}">
 
+            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
+            <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>
+            <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80"/>
+        </StackPanel>
     </Grid>
 </UserControl>

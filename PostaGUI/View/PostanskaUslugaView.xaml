@@ -8,7 +8,15 @@
              mc:Ignorable="d" Loaded="UserControl_Loaded" Height="709.049" Width="770">
     <UserControl.Resources>
         <CollectionViewSource x:Key="postanskaUslugaViewSource" d:DesignSource="{d:DesignInstance {x:Type DatabaseModel:PostanskaUsluga}, CreateList=True}"/>
+        <RoutedUICommand x:Key="DeleteCommand" Text="Izbrisi"/>
+        <RoutedUICommand x:Key="UpdateCommand" Text="Izmeni"/>
+        <RoutedUICommand x:Key="AddCommand" Text="Dodaj"/>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{StaticResource DeleteCommand}" Executed="DeleteCommandHandler"/>
+        <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler"/>
+        <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
+    </UserControl.CommandBindings>
     <Grid DataContext="{StaticResource postanskaUslugaViewSource}" Height="697" VerticalAlignment="Top" Margin="0,0,10,0">
 
         <DataGrid x:Name="postanskaUslugaDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,0" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Height="147" VerticalAlignment="Top">
@@ -79,6 +87,11 @@
             <Label Content="Ulica:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="13" VerticalAlignment="Center"/>
             <TextBox x:Name="ulicaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="13" Text="{Binding Ulica, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postanskaUslugaViewSource}">
 
+            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
+            <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>
+            <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -21,7 +21,8 @@ namespace PostaGUI.View
     /// </summary>
     public partial class PostaView : UserControl
     {
-        PostaDbContainer _context = new PostaDbContainer();
+        PostaDbContainer _context;
+        CollectionViewSource postaViewSource;
 
         public PostaView()
         {
@@ -36,7 +37,7 @@ namespace PostaGUI.View
             if (!System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
             {
                 //Load your data here and assign the result to the CollectionViewSource.
-                System.Windows.Data.CollectionViewSource postaViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["postaViewSource"];
+                postaViewSource = (System.Windows.Data.CollectionViewSource)this.Resources["postaViewSource"];
 
                 // Load is an extension method on IQueryable,
                 // defined in the System.Data.Entity namespace.
@@ -44,11 +45,116 @@ namespace PostaGUI.View
                 // similar to ToList but without creating a list.
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
+                _context = new PostaDbContainer();
                 _context.Poste.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
                 postaViewSource.Source = _context.Poste.Local;
+            }
+        }
+        private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = postaViewSource.View.CurrentItem as Posta;
+
+            var posta = (from c in _context.Poste
+                             where c.PostanskiBroj == cur.PostanskiBroj
+                             select c).FirstOrDefault();
+
+            if (posta != null)
+            {
+                try
+                {
+                    _context.Poste.Remove(posta);
+
+                    _context.SaveChanges();
+                    _context.Poste.Load();
+
+                    postaViewSource.Source = _context.Poste.Local;
+                    postaViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+                   
+                   // postaViewSource.View.Refresh();
+                    MessageBox.Show("Trenutno nije moguce obrisati postu.", "Error");
+                    return;
+                }
+
+            }
+            
+
+        }
+        private void UpdateCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            _context = new PostaDbContainer();
+            var cur = postaViewSource.View.CurrentItem as Posta;
+
+            var posta = (from c in _context.Poste
+                         where c.PostanskiBroj == cur.PostanskiBroj
+                         select c).FirstOrDefault();
+
+            if (posta != null)
+            {
+                try
+                {
+                    posta.Grad = gradTextBox.Text;
+                    posta.Ulica = ulicaTextBox.Text;
+                    posta.Broj = brojTextBox.Text;
+
+                    _context.SaveChanges();
+                    _context.Poste.Load();
+
+                    postaViewSource.Source = _context.Poste.Local;
+                    postaViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce izmeniti postu.", "Error");
+                    return;
+                }
+
+            }
+
+        }
+        private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            _context = new PostaDbContainer();
+
+            Posta posta = new Posta();
+
+            if (posta != null)
+            {
+                try
+                {
+                    posta.PostanskiBroj = Convert.ToDecimal(postanskiBrojTextBox.Text);
+                    posta.Grad = gradTextBox.Text;
+                    posta.Ulica = ulicaTextBox.Text;
+                    posta.Broj = brojTextBox.Text;
+
+                    _context.Poste.Add(posta);
+                    _context.SaveChanges();
+                    _context.Poste.Load();
+
+                    postaViewSource.Source = _context.Poste.Local;
+                    postaViewSource.View.Refresh();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Trenutno nije moguce dodati postu.", "Error");
+                    return;
+                }
+
             }
         }
     }

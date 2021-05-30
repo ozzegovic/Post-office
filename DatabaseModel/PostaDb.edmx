@@ -71,7 +71,7 @@
       <PropertyRef Name="Id_Skladiste" />
     </Key>
     <Property Name="Id_Skladiste" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PostaPostanskiBroj" Type="int" Nullable="true" />
+    <Property Name="PostaPostanskiBroj" Type="decimal" Nullable="true" />
     <Property Name="Grad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ulica" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
@@ -81,25 +81,25 @@
       <PropertyRef Name="JMBG_Radnika" />
       <PropertyRef Name="PostaPostanskiBroj" />
     </Key>
-    <Property Name="JMBG_Radnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
     <Property Name="Ime" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostaPostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="PostaPostanskiBroj" Type="decimal" Nullable="false" />
   </EntityType>
   <EntityType Name="Postari">
     <Key>
       <PropertyRef Name="JMBG_Radnika" />
       <PropertyRef Name="PostanskiBroj" />
     </Key>
-    <Property Name="JMBG_Radnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
+    <Property Name="PostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="DeoGrada" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Poste">
     <Key>
       <PropertyRef Name="PostanskiBroj" />
     </Key>
-    <Property Name="PostanskiBroj" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="Grad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ulica" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
@@ -109,8 +109,8 @@
       <PropertyRef Name="JMBG_Radnika" />
       <PropertyRef Name="PostanskiBroj" />
     </Key>
-    <Property Name="JMBG_Radnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
+    <Property Name="PostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="Odeljenje" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PostanskeUsluge">
@@ -120,9 +120,9 @@
     <Property Name="ID_Posiljke" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SkladisteId_Skladiste" Type="int" Nullable="false" />
     <Property Name="SluzbenikJMBG_Radnika" Type="int" Nullable="false" />
-    <Property Name="SluzbenikPostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="SluzbenikPostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="PostarJMBG_Radnika" Type="int" Nullable="false" />
-    <Property Name="PostarPostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="PostarPostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="PosiljalacIme" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PosiljalacPrezime" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrimalacIme" Type="nvarchar(max)" Nullable="false" />
@@ -130,7 +130,7 @@
     <Property Name="Grad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ulica" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostanskiBrojOdredista" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostanskiBrojOdredista" Type="decimal" Nullable="false" />
   </EntityType>
   <EntityType Name="Pakets">
     <Key>
@@ -152,7 +152,7 @@
     </Key>
     <Property Name="ID_Uplate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SluzbenikJMBG_Radnika" Type="int" Nullable="false" />
-    <Property Name="SluzbenikPostanskiBroj" Type="int" Nullable="false" />
+    <Property Name="SluzbenikPostanskiBroj" Type="decimal" Nullable="false" />
     <Property Name="PrimalacIme" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrimalacPrezime" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PosiljalacIme" Type="nvarchar(max)" Nullable="false" />
@@ -401,7 +401,7 @@
             <PropertyRef Name="Id_Skladiste" />
           </Key>
           <Property Name="Id_Skladiste" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostaPostanskiBroj" Type="Int32" Nullable="true" />
+          <Property Name="PostaPostanskiBroj" Type="Decimal" Nullable="true" />
           <NavigationProperty Name="Posta" Relationship="PostaDb.SkladistePosta" FromRole="Skladiste" ToRole="Posta" />
           <Property Name="Grad" Type="String" Nullable="false" />
           <Property Name="Ulica" Type="String" Nullable="false" />
@@ -413,12 +413,12 @@
             <PropertyRef Name="JMBG_Radnika" />
             <PropertyRef Name="PostaPostanskiBroj" />
           </Key>
-          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Ime" Type="String" Nullable="false" />
           <Property Name="Prezime" Type="String" Nullable="false" />
           <NavigationProperty Name="Postar" Relationship="PostaDb.PostarRadnik" FromRole="Radnik" ToRole="Postar" />
           <NavigationProperty Name="Posta" Relationship="PostaDb.PostaRadnik" FromRole="Radnik" ToRole="Posta" />
-          <Property Name="PostaPostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="PostaPostanskiBroj" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Sluzbenik" Relationship="PostaDb.RadnikSluzbenik" FromRole="Radnik" ToRole="Sluzbenik" />
         </EntityType>
         <EntityType Name="Postar">
@@ -426,9 +426,9 @@
             <PropertyRef Name="JMBG_Radnika" />
             <PropertyRef Name="PostanskiBroj" />
           </Key>
-          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="Radnik" Relationship="PostaDb.PostarRadnik" FromRole="Postar" ToRole="Radnik" />
-          <Property Name="PostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="Decimal" Nullable="false" />
           <Property Name="DeoGrada" Type="String" Nullable="false" />
           <NavigationProperty Name="PostanskaUslugas" Relationship="PostaDb.PostanskaUslugaPostar" FromRole="Postar" ToRole="PostanskaUsluga" />
         </EntityType>
@@ -450,7 +450,7 @@
           <Key>
             <PropertyRef Name="PostanskiBroj" />
           </Key>
-          <Property Name="PostanskiBroj" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostanskiBroj" Type="Decimal" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="Radniks" Relationship="PostaDb.PostaRadnik" FromRole="Posta" ToRole="Radnik" />
           <NavigationProperty Name="Skladistes" Relationship="PostaDb.SkladistePosta" FromRole="Posta" ToRole="Skladiste" />
           <Property Name="Grad" Type="String" Nullable="false" />
@@ -474,9 +474,9 @@
             <PropertyRef Name="JMBG_Radnika" />
             <PropertyRef Name="PostanskiBroj" />
           </Key>
-          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <NavigationProperty Name="Radnik" Relationship="PostaDb.RadnikSluzbenik" FromRole="Sluzbenik" ToRole="Radnik" />
-          <Property Name="PostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="PostanskiBroj" Type="Decimal" Nullable="false" />
           <Property Name="Odeljenje" Type="String" Nullable="false" />
           <NavigationProperty Name="PostanskaUslugas" Relationship="PostaDb.PostanskaUslugaSluzbenik" FromRole="Sluzbenik" ToRole="PostanskaUsluga" />
           <NavigationProperty Name="FinansijskaUslugas" Relationship="PostaDb.FinansijskaUslugaSluzbenik" FromRole="Sluzbenik" ToRole="FinansijskaUsluga" />
@@ -516,10 +516,10 @@
           <Property Name="SkladisteId_Skladiste" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sluzbenik" Relationship="PostaDb.PostanskaUslugaSluzbenik" FromRole="PostanskaUsluga" ToRole="Sluzbenik" />
           <Property Name="SluzbenikJMBG_Radnika" Type="Int32" Nullable="false" />
-          <Property Name="SluzbenikPostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="SluzbenikPostanskiBroj" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Postar" Relationship="PostaDb.PostanskaUslugaPostar" FromRole="PostanskaUsluga" ToRole="Postar" />
           <Property Name="PostarJMBG_Radnika" Type="Int32" Nullable="false" />
-          <Property Name="PostarPostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="PostarPostanskiBroj" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Paket" Relationship="PostaDb.PostanskaUslugaPaket" FromRole="PostanskaUsluga" ToRole="Paket" />
           <NavigationProperty Name="Pismo" Relationship="PostaDb.PismoPostanskaUsluga" FromRole="PostanskaUsluga" ToRole="Pismo" />
           <Property Name="PosiljalacIme" Type="String" Nullable="false" />
@@ -529,7 +529,7 @@
           <Property Name="Grad" Type="String" Nullable="false" />
           <Property Name="Ulica" Type="String" Nullable="false" />
           <Property Name="Broj" Type="String" Nullable="false" />
-          <Property Name="PostanskiBrojOdredista" Type="String" Nullable="false" />
+          <Property Name="PostanskiBrojOdredista" Type="Decimal" Nullable="false" />
         </EntityType>
         <Association Name="SkladistePostanskaUsluga">
           <End Type="PostaDb.Skladiste" Role="Skladiste" Multiplicity="1" />
@@ -618,7 +618,7 @@
           <Property Name="ID_Uplate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Sluzbenik" Relationship="PostaDb.FinansijskaUslugaSluzbenik" FromRole="FinansijskaUsluga" ToRole="Sluzbenik" />
           <Property Name="SluzbenikJMBG_Radnika" Type="Int32" Nullable="false" />
-          <Property Name="SluzbenikPostanskiBroj" Type="Int32" Nullable="false" />
+          <Property Name="SluzbenikPostanskiBroj" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="Uplatnica" Relationship="PostaDb.FinansijskaUslugaUplatnica" FromRole="FinansijskaUsluga" ToRole="Uplatnica" />
           <NavigationProperty Name="PostNet" Relationship="PostaDb.PostNetFinansijskaUsluga" FromRole="FinansijskaUsluga" ToRole="PostNet" />
           <Property Name="PrimalacIme" Type="String" Nullable="false" />

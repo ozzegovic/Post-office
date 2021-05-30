@@ -17,9 +17,9 @@ namespace DatabaseModel
         public int ID_Posiljke { get; set; }
         public int SkladisteId_Skladiste { get; set; }
         public int SluzbenikJMBG_Radnika { get; set; }
-        public int SluzbenikPostanskiBroj { get; set; }
+        public decimal SluzbenikPostanskiBroj { get; set; }
         public int PostarJMBG_Radnika { get; set; }
-        public int PostarPostanskiBroj { get; set; }
+        public decimal PostarPostanskiBroj { get; set; }
         public string PosiljalacIme { get; set; }
         public string PosiljalacPrezime { get; set; }
         public string PrimalacIme { get; set; }
@@ -27,7 +27,7 @@ namespace DatabaseModel
         public string Grad { get; set; }
         public string Ulica { get; set; }
         public string Broj { get; set; }
-        public string PostanskiBrojOdredista { get; set; }
+        public decimal PostanskiBrojOdredista { get; set; }
     
         public virtual Skladiste Skladiste { get; set; }
         public virtual Sluzbenik Sluzbenik { get; set; }

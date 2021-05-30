@@ -22,7 +22,7 @@ namespace DatabaseModel
         }
     
         public int JMBG_Radnika { get; set; }
-        public int PostanskiBroj { get; set; }
+        public decimal PostanskiBroj { get; set; }
         public string Odeljenje { get; set; }
     
         public virtual Radnik Radnik { get; set; }

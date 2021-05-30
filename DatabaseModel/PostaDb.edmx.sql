@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/29/2021 20:35:24
+-- Date Created: 05/30/2021 19:02:11
 -- Generated from EDMX file: C:\Users\maja\Desktop\UNI\4\VIII\baze2\Projekat\PostaGUI\DatabaseModel\PostaDb.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,80 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_PostarRadnik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Postari] DROP CONSTRAINT [FK_PostarRadnik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostaRadnik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Radnici] DROP CONSTRAINT [FK_PostaRadnik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RadnikSluzbenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sluzbenici] DROP CONSTRAINT [FK_RadnikSluzbenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SkladistePosta]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Skladista] DROP CONSTRAINT [FK_SkladistePosta];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SkladistePostanskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostanskeUsluge] DROP CONSTRAINT [FK_SkladistePostanskaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostanskaUslugaSluzbenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostanskeUsluge] DROP CONSTRAINT [FK_PostanskaUslugaSluzbenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostanskaUslugaPostar]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostanskeUsluge] DROP CONSTRAINT [FK_PostanskaUslugaPostar];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostanskaUslugaPaket]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pakets] DROP CONSTRAINT [FK_PostanskaUslugaPaket];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PismoPostanskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pismoes] DROP CONSTRAINT [FK_PismoPostanskaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FinansijskaUslugaSluzbenik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FinansijskaUslugas] DROP CONSTRAINT [FK_FinansijskaUslugaSluzbenik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FinansijskaUslugaUplatnica]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Uplatnicas] DROP CONSTRAINT [FK_FinansijskaUslugaUplatnica];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostNetFinansijskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostNets] DROP CONSTRAINT [FK_PostNetFinansijskaUsluga];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Skladista]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Skladista];
+GO
+IF OBJECT_ID(N'[dbo].[Radnici]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Radnici];
+GO
+IF OBJECT_ID(N'[dbo].[Postari]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Postari];
+GO
+IF OBJECT_ID(N'[dbo].[Poste]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Poste];
+GO
+IF OBJECT_ID(N'[dbo].[Sluzbenici]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Sluzbenici];
+GO
+IF OBJECT_ID(N'[dbo].[PostanskeUsluge]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PostanskeUsluge];
+GO
+IF OBJECT_ID(N'[dbo].[Pakets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pakets];
+GO
+IF OBJECT_ID(N'[dbo].[Pismoes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pismoes];
+GO
+IF OBJECT_ID(N'[dbo].[FinansijskaUslugas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FinansijskaUslugas];
+GO
+IF OBJECT_ID(N'[dbo].[Uplatnicas]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Uplatnicas];
+GO
+IF OBJECT_ID(N'[dbo].[PostNets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PostNets];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -30,7 +99,7 @@ GO
 -- Creating table 'Skladista'
 CREATE TABLE [dbo].[Skladista] (
     [Id_Skladiste] int IDENTITY(1,1) NOT NULL,
-    [PostaPostanskiBroj] int  NULL,
+    [PostaPostanskiBroj] decimal(18,0)  NULL,
     [Grad] nvarchar(max)  NOT NULL,
     [Ulica] nvarchar(max)  NOT NULL,
     [Broj] nvarchar(max)  NOT NULL
@@ -39,24 +108,24 @@ GO
 
 -- Creating table 'Radnici'
 CREATE TABLE [dbo].[Radnici] (
-    [JMBG_Radnika] int IDENTITY(1,1) NOT NULL,
+    [JMBG_Radnika] int  NOT NULL,
     [Ime] nvarchar(max)  NOT NULL,
     [Prezime] nvarchar(max)  NOT NULL,
-    [PostaPostanskiBroj] int  NOT NULL
+    [PostaPostanskiBroj] decimal(18,0)  NOT NULL
 );
 GO
 
 -- Creating table 'Postari'
 CREATE TABLE [dbo].[Postari] (
-    [JMBG_Radnika] int IDENTITY(1,1) NOT NULL,
-    [PostanskiBroj] int  NOT NULL,
+    [JMBG_Radnika] int  NOT NULL,
+    [PostanskiBroj] decimal(18,0)  NOT NULL,
     [DeoGrada] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'Poste'
 CREATE TABLE [dbo].[Poste] (
-    [PostanskiBroj] int IDENTITY(1,1) NOT NULL,
+    [PostanskiBroj] decimal(18,0)  NOT NULL,
     [Grad] nvarchar(max)  NOT NULL,
     [Ulica] nvarchar(max)  NOT NULL,
     [Broj] nvarchar(max)  NOT NULL
@@ -65,8 +134,8 @@ GO
 
 -- Creating table 'Sluzbenici'
 CREATE TABLE [dbo].[Sluzbenici] (
-    [JMBG_Radnika] int IDENTITY(1,1) NOT NULL,
-    [PostanskiBroj] int  NOT NULL,
+    [JMBG_Radnika] int  NOT NULL,
+    [PostanskiBroj] decimal(18,0)  NOT NULL,
     [Odeljenje] nvarchar(max)  NOT NULL
 );
 GO
@@ -76,9 +145,9 @@ CREATE TABLE [dbo].[PostanskeUsluge] (
     [ID_Posiljke] int IDENTITY(1,1) NOT NULL,
     [SkladisteId_Skladiste] int  NOT NULL,
     [SluzbenikJMBG_Radnika] int  NOT NULL,
-    [SluzbenikPostanskiBroj] int  NOT NULL,
+    [SluzbenikPostanskiBroj] decimal(18,0)  NOT NULL,
     [PostarJMBG_Radnika] int  NOT NULL,
-    [PostarPostanskiBroj] int  NOT NULL,
+    [PostarPostanskiBroj] decimal(18,0)  NOT NULL,
     [PosiljalacIme] nvarchar(max)  NOT NULL,
     [PosiljalacPrezime] nvarchar(max)  NOT NULL,
     [PrimalacIme] nvarchar(max)  NOT NULL,
@@ -86,7 +155,7 @@ CREATE TABLE [dbo].[PostanskeUsluge] (
     [Grad] nvarchar(max)  NOT NULL,
     [Ulica] nvarchar(max)  NOT NULL,
     [Broj] nvarchar(max)  NOT NULL,
-    [PostanskiBrojOdredista] nvarchar(max)  NOT NULL
+    [PostanskiBrojOdredista] decimal(18,0)  NOT NULL
 );
 GO
 
@@ -108,7 +177,7 @@ GO
 CREATE TABLE [dbo].[FinansijskaUslugas] (
     [ID_Uplate] int IDENTITY(1,1) NOT NULL,
     [SluzbenikJMBG_Radnika] int  NOT NULL,
-    [SluzbenikPostanskiBroj] int  NOT NULL,
+    [SluzbenikPostanskiBroj] decimal(18,0)  NOT NULL,
     [PrimalacIme] nvarchar(max)  NOT NULL,
     [PrimalacPrezime] nvarchar(max)  NOT NULL,
     [PosiljalacIme] nvarchar(max)  NOT NULL,

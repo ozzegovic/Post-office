@@ -21,7 +21,7 @@ namespace DatabaseModel
             this.Skladistes = new ObservableCollection<Skladiste>();
         }
     
-        public int PostanskiBroj { get; set; }
+        public decimal PostanskiBroj { get; set; }
         public string Grad { get; set; }
         public string Ulica { get; set; }
         public string Broj { get; set; }
