@@ -6,13 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3bc83590599f479ab93dd92f26fa9522" Name="Diagram1" ZoomLevel="98" >
         <EntityTypeShape EntityType="PostaDb.Skladiste" Width="2.75" PointX="7.125" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PostaDb.Radnik" Width="1.5" PointX="1" PointY="3.875" />
-        <EntityTypeShape EntityType="PostaDb.Postar" Width="1.5" PointX="1.125" PointY="7.125" />
-        <AssociationConnector Association="PostaDb.PostarRadnik" />
+        <EntityTypeShape EntityType="PostaDb.Radnik" Width="1.5" PointX="1" PointY="3.5" />
+        <EntityTypeShape EntityType="PostaDb.Postar" Width="1.5" PointX="1" PointY="7.25" />
         <EntityTypeShape EntityType="PostaDb.Posta" Width="1.5" PointX="1.125" PointY="0.625" />
         <AssociationConnector Association="PostaDb.PostaRadnik" />
-        <EntityTypeShape EntityType="PostaDb.Sluzbenik" Width="1.5" PointX="3.625" PointY="3.5" />
-        <AssociationConnector Association="PostaDb.RadnikSluzbenik" />
+        <EntityTypeShape EntityType="PostaDb.Sluzbenik" Width="1.5" PointX="4.375" PointY="3.5" />
         <AssociationConnector Association="PostaDb.SkladistePosta" />
         <EntityTypeShape EntityType="PostaDb.PostanskaUsluga" Width="1.5" PointX="7.25" PointY="3.625" />
         <AssociationConnector Association="PostaDb.SkladistePostanskaUsluga" />
@@ -20,14 +18,21 @@
         <AssociationConnector Association="PostaDb.PostanskaUslugaPostar" />
         <EntityTypeShape EntityType="PostaDb.Paket" Width="1.5" PointX="11" PointY="3.375" />
         <EntityTypeShape EntityType="PostaDb.Pismo" Width="1.5" PointX="10.875" PointY="5.5" />
-        <AssociationConnector Association="PostaDb.PostanskaUslugaPaket" />
-        <AssociationConnector Association="PostaDb.PismoPostanskaUsluga" />
-        <EntityTypeShape EntityType="PostaDb.FinansijskaUsluga" Width="1.5" PointX="3.875" PointY="9.75" />
+        <EntityTypeShape EntityType="PostaDb.FinansijskaUsluga" Width="1.5" PointX="4.375" PointY="9.375" />
         <AssociationConnector Association="PostaDb.FinansijskaUslugaSluzbenik" />
-        <EntityTypeShape EntityType="PostaDb.Uplatnica" Width="1.5" PointX="11" PointY="7.875" />
-        <AssociationConnector Association="PostaDb.FinansijskaUslugaUplatnica" />
+        <EntityTypeShape EntityType="PostaDb.Uplatnica" Width="1.5" PointX="11.375" PointY="10.5" />
         <EntityTypeShape EntityType="PostaDb.PostNet" Width="1.5" PointX="11.375" PointY="10.375" />
-        <AssociationConnector Association="PostaDb.PostNetFinansijskaUsluga" />
+        <InheritanceConnector EntityType="PostaDb.Sluzbenik" />
+        <InheritanceConnector EntityType="PostaDb.Postar" />
+        <InheritanceConnector EntityType="PostaDb.Pismo" />
+        <InheritanceConnector EntityType="PostaDb.Paket" />
+        <InheritanceConnector EntityType="PostaDb.Uplatnica" ManuallyRouted="true" >
+          <ConnectorPoint PointX="5.875" PointY="10.462757968489731" />
+          <ConnectorPoint PointX="5.99875" PointY="10.462757968489731" />
+          <ConnectorPoint PointX="5.99875" PointY="11.105540364583334" />
+          <ConnectorPoint PointX="11.375" PointY="11.105540364583334" />
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="PostaDb.PostNet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

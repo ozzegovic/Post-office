@@ -12,7 +12,7 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class FinansijskaUsluga
+    public abstract partial class FinansijskaUsluga
     {
         public int ID_Uplate { get; set; }
         public int SluzbenikJMBG_Radnika { get; set; }
@@ -27,7 +27,5 @@ namespace DatabaseModel
         public double Iznos { get; set; }
     
         public virtual Sluzbenik Sluzbenik { get; set; }
-        public virtual Uplatnica Uplatnica { get; set; }
-        public virtual PostNet PostNet { get; set; }
     }
 }

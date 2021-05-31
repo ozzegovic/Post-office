@@ -56,16 +56,17 @@ namespace PostaGUI.View
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             _context = new PostaDbContainer();
-            var cur = radnikViewSource.View.CurrentItem as Radnik;
+            var cur = radnikViewSource.View.CurrentItem as Sluzbenik;
 
             var radnik = (from c in _context.Radnici
                          where c.JMBG_Radnika == cur.JMBG_Radnika
-                          select c).FirstOrDefault();
+                          select c).FirstOrDefault() as Sluzbenik;
 
             if (radnik != null)
             {
                 try
                 {
+                    _context.Radnici_Sluzbenik.Remove(radnik);
                     _context.Radnici.Remove(radnik);
 
                     _context.SaveChanges();
@@ -127,34 +128,34 @@ namespace PostaGUI.View
         {
             _context = new PostaDbContainer();
 
-            Radnik radnik = new Radnik();
+            //Radnik radnik = new Radnik();
 
-            if (radnik != null)
-            {
-                try
-                {
-                    radnik.Ime = imeTextBox.Text;
-                    radnik.Prezime = prezimeTextBox.Text;
-                    radnik.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
-                    radnik.PostaPostanskiBroj = Convert.ToInt32(postaPostanskiBrojTextBox.Text);
+            //if (radnik != null)
+            //{
+            //    try
+            //    {
+            //        radnik.Ime = imeTextBox.Text;
+            //        radnik.Prezime = prezimeTextBox.Text;
+            //        radnik.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
+            //        radnik.PostaPostanskiBroj = Convert.ToInt32(postaPostanskiBrojTextBox.Text);
 
-                    _context.Radnici.Add(radnik);
-                    _context.SaveChanges();
-                    _context.Radnici.Load();
+            //        _context.Radnici.Add(radnik);
+            //        _context.SaveChanges();
+            //        _context.Radnici.Load();
 
-                    radnikViewSource.Source = _context.Radnici.Local;
-                    radnikViewSource.View.Refresh();
+            //        radnikViewSource.Source = _context.Radnici.Local;
+            //        radnikViewSource.View.Refresh();
 
 
-                }
-                catch (Exception ex)
-                {
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-                    MessageBox.Show("Trenutno nije moguce dodati radnika.", "Error");
-                    return;
-                }
+            //        MessageBox.Show("Trenutno nije moguce dodati radnika.", "Error");
+            //        return;
+            //    }
 
-            }
+            //}
 
 
         }

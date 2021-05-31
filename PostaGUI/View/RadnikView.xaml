@@ -48,11 +48,11 @@
             <Label Content="Prezime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox x:Name="prezimeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Prezime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource radnikViewSource}">
+        <StackPanel Orientation="Vertical" Margin="265,159,456,0" Height="61" VerticalAlignment="Top" DataContext="{StaticResource radnikViewSource}">
 
-            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
-            <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>
-            <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80"/>
+            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" IsEnabled="False"/>
+            <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80" />
+            <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80" />
         </StackPanel>
     </Grid>
 </UserControl>

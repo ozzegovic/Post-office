@@ -12,11 +12,8 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Pismo
+    public partial class Pismo : PostanskaUsluga
     {
-        public int ID_Posiljke { get; set; }
         public bool Preporuceno { get; set; }
-    
-        public virtual PostanskaUsluga PostanskaUsluga { get; set; }
     }
 }

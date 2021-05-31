@@ -12,11 +12,8 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Paket
+    public partial class Paket : PostanskaUsluga
     {
-        public int ID_Posiljke { get; set; }
         public double Tezina { get; set; }
-    
-        public virtual PostanskaUsluga PostanskaUsluga { get; set; }
     }
 }

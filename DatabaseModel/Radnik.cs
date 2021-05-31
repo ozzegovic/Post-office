@@ -12,15 +12,13 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Radnik
+    public abstract partial class Radnik
     {
         public int JMBG_Radnika { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
         public decimal PostaPostanskiBroj { get; set; }
     
-        public virtual Postar Postar { get; set; }
         public virtual Posta Posta { get; set; }
-        public virtual Sluzbenik Sluzbenik { get; set; }
     }
 }

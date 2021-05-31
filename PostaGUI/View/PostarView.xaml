@@ -24,7 +24,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="deoGradaColumn" Width="SizeToHeader" Header="Deo Grada" Binding="{Binding DeoGrada}"/>
                 <DataGridTextColumn x:Name="jMBG_RadnikaColumn" Width="SizeToHeader" Header="JMBG Radnika" Binding="{Binding JMBG_Radnika}"/>
-                <DataGridTextColumn x:Name="postanskiBrojColumn" Width="SizeToHeader" Header="Postanski Broj" Binding="{Binding PostanskiBroj}"/>
+                <DataGridTextColumn x:Name="postanskiBrojColumn" Width="SizeToHeader" Header="Postanski Broj" Binding="{Binding PostaPostanskiBroj}"/>
+                <DataGridTextColumn x:Name="imeColumn" Width="SizeToHeader" Header="Ime" Binding="{Binding Ime}"/>
+                <DataGridTextColumn x:Name="prezimeColumn" Width="SizeToHeader" Header="Prezime" Binding="{Binding Prezime}"/>
+
             </DataGrid.Columns>
         </DataGrid>
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="10,169,0,0" VerticalAlignment="Top">
@@ -36,15 +39,23 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
             </Grid.RowDefinitions>
             <Label Content="Deo Grada:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="deoGradaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding DeoGrada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="JMBG Radnika:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox x:Name="jMBG_RadnikaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding JMBG_Radnika, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Postanski Broj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="postanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding PostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="postanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding PostaPostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Ime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="imeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Ime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Prezime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="prezimeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Prezime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
         </Grid>
-        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postarViewSource}">
+        <StackPanel Orientation="Vertical" Margin="235,169,486,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postarViewSource}">
 
             <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
             <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>

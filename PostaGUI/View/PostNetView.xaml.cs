@@ -46,11 +46,11 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.PostNets.Load();
+                _context.FinansijskaUslugas_PostNet.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                postNetViewSource.Source = _context.PostNets.Local;
+                postNetViewSource.Source = _context.FinansijskaUslugas_PostNet.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -58,20 +58,20 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = postNetViewSource.View.CurrentItem as PostNet;
 
-            var postnet = (from c in _context.PostNets
-                             where c.ID_Uplate == cur.ID_Uplate
+            var postnet = (from c in _context.FinansijskaUslugas_PostNet
+                           where c.ID_Uplate == cur.ID_Uplate
                              select c).FirstOrDefault();
 
             if (postnet != null)
             {
                 try
                 {
-                    _context.PostNets.Remove(postnet);
+                    _context.FinansijskaUslugas_PostNet.Remove(postnet);
 
                     _context.SaveChanges();
-                    _context.PostNets.Load();
+                    _context.FinansijskaUslugas_PostNet.Load();
 
-                    postNetViewSource.Source = _context.PostNets.Local;
+                    postNetViewSource.Source = _context.FinansijskaUslugas_PostNet.Local;
                     postNetViewSource.View.Refresh();
 
 
@@ -92,7 +92,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = postNetViewSource.View.CurrentItem as PostNet;
 
-            var postnet = (from c in _context.PostNets
+            var postnet = (from c in _context.FinansijskaUslugas_PostNet
                            where c.ID_Uplate == cur.ID_Uplate
                            select c).FirstOrDefault();
 
@@ -100,12 +100,26 @@ namespace PostaGUI.View
             {
                 try
                 {
+
                     postnet.BrojTelefona = Convert.ToInt32(brojTelefonaTextBox.Text);
                     postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
-                    _context.SaveChanges();
-                    _context.PostNets.Load();
 
-                    postNetViewSource.Source = _context.PostNets.Local;
+                    postnet.Iznos = Convert.ToDouble(iznosTextBox.Text);
+                    postnet.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    postnet.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    postnet.PrimalacIme = primalacImeTextBox.Text;
+                    postnet.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    postnet.Grad = gradTextBox.Text;
+                    postnet.Ulica = ulicaTextBox.Text;
+                    postnet.Broj = brojTextBox.Text;
+                    postnet.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    postnet.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+
+                    _context.SaveChanges();
+                    _context.FinansijskaUslugas_PostNet.Load();
+
+
+                    postNetViewSource.Source = _context.FinansijskaUslugas_PostNet.Local;
                     postNetViewSource.View.Refresh();
 
 
@@ -132,11 +146,24 @@ namespace PostaGUI.View
                 {
                     postnet.BrojTelefona = Convert.ToInt32(brojTelefonaTextBox.Text);
                     postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
-                    _context.PostNets.Add(postnet);
-                    _context.SaveChanges();
-                    _context.PostNets.Load();
 
-                    postNetViewSource.Source = _context.PostNets.Local;
+                    postnet.Iznos = Convert.ToDouble(iznosTextBox.Text);
+                    postnet.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    postnet.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    postnet.PrimalacIme = primalacImeTextBox.Text;
+                    postnet.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    postnet.Grad = gradTextBox.Text;
+                    postnet.Ulica = ulicaTextBox.Text;
+                    postnet.Broj = brojTextBox.Text;
+                    postnet.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    postnet.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+
+
+                    _context.FinansijskaUslugas_PostNet.Add(postnet);
+                    _context.SaveChanges();
+                    _context.FinansijskaUslugas_PostNet.Load();
+
+                    postNetViewSource.Source = _context.FinansijskaUslugas_PostNet.Local;
                     postNetViewSource.View.Refresh();
 
 

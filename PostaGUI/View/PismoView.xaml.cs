@@ -47,11 +47,11 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.Pismoes.Load();
+                _context.PostanskeUsluge_Pismo.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                pismoViewSource.Source = _context.Pismoes.Local;
+                pismoViewSource.Source = _context.PostanskeUsluge_Pismo.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -59,7 +59,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = pismoViewSource.View.CurrentItem as Pismo;
 
-            var pismo = (from c in _context.Pismoes
+            var pismo = (from c in _context.PostanskeUsluge_Pismo
                          where c.ID_Posiljke == cur.ID_Posiljke
                          select c).FirstOrDefault();
 
@@ -67,11 +67,11 @@ namespace PostaGUI.View
             {
                 try
                 {
-                    _context.Pismoes.Remove(pismo);
+                    _context.PostanskeUsluge_Pismo.Remove(pismo);
                     _context.SaveChanges();
-                    _context.Pismoes.Load();
+                    _context.PostanskeUsluge_Pismo.Load();
 
-                    pismoViewSource.Source = _context.Pismoes.Local;
+                    pismoViewSource.Source = _context.PostanskeUsluge_Pismo.Local;
                     pismoViewSource.View.Refresh();
 
 
@@ -92,7 +92,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = pismoViewSource.View.CurrentItem as Pismo;
 
-            var pismo = (from c in _context.Pismoes
+            var pismo = (from c in _context.PostanskeUsluge_Pismo
                          where c.ID_Posiljke == cur.ID_Posiljke
                          select c).FirstOrDefault();
 
@@ -101,10 +101,27 @@ namespace PostaGUI.View
                 try
                 {
                     pismo.Preporuceno = preporucenoCheckBox.IsChecked ?? false;
-                    _context.SaveChanges();
-                    _context.Pismoes.Load();
 
-                    pismoViewSource.Source = _context.Pismoes.Local;
+                    //nisam sigurna da li sme da se menja odavde bilo sta sto nije samo za pismo, ali mi je lakse da imam ovde
+                    // oni polja koja su od postanske usluge se mogu meenjati iz postanske usluge i te promene ce se videti i ovde
+                    pismo.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
+                    pismo.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    pismo.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    pismo.PrimalacIme = primalacImeTextBox.Text;
+                    pismo.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    pismo.Grad = gradTextBox.Text;
+                    pismo.Ulica = ulicaTextBox.Text;
+                    pismo.Broj = brojTextBox.Text;
+                    pismo.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    pismo.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+                    pismo.PostarJMBG_Radnika = Convert.ToInt32(postarJMBG_RadnikaTextBox.Text);
+                    pismo.PostarPostanskiBroj = Convert.ToInt32(postarPostanskiBrojTextBox.Text);
+                    pismo.SkladisteId_Skladiste = Convert.ToInt32(skladisteId_SkladisteTextBox.Text);
+
+                    _context.SaveChanges();
+                    _context.PostanskeUsluge_Pismo.Load();
+
+                     pismoViewSource.Source = _context.PostanskeUsluge_Pismo.Local;
                     pismoViewSource.View.Refresh();
 
 
@@ -129,11 +146,25 @@ namespace PostaGUI.View
                 try
                 {
                     pismo.Preporuceno = preporucenoCheckBox.IsChecked ?? false;
-                    _context.Pismoes.Add(pismo);
-                    _context.SaveChanges();
-                    _context.Pismoes.Load();
+                    pismo.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
+                    pismo.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    pismo.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    pismo.PrimalacIme = primalacImeTextBox.Text;
+                    pismo.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    pismo.Grad = gradTextBox.Text;
+                    pismo.Ulica = ulicaTextBox.Text;
+                    pismo.Broj = brojTextBox.Text;
+                    pismo.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    pismo.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+                    pismo.PostarJMBG_Radnika = Convert.ToInt32(postarJMBG_RadnikaTextBox.Text);
+                    pismo.PostarPostanskiBroj = Convert.ToInt32(postarPostanskiBrojTextBox.Text);
+                    pismo.SkladisteId_Skladiste = Convert.ToInt32(skladisteId_SkladisteTextBox.Text);
 
-                    pismoViewSource.Source = _context.Pismoes.Local;
+                    _context.PostanskeUsluge_Pismo.Add(pismo);
+                    _context.SaveChanges();
+                    _context.PostanskeUsluge_Pismo.Load();
+
+                    pismoViewSource.Source = _context.PostanskeUsluge_Pismo.Local;
                     pismoViewSource.View.Refresh();
 
 

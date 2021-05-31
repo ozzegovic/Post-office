@@ -12,12 +12,9 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class PostNet
+    public partial class PostNet : FinansijskaUsluga
     {
-        public int ID_Uplate { get; set; }
         public int BrojTelefona { get; set; }
         public int JMBG_Primaoca { get; set; }
-    
-        public virtual FinansijskaUsluga FinansijskaUsluga { get; set; }
     }
 }

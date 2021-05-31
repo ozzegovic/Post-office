@@ -12,11 +12,8 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Uplatnica
+    public partial class Uplatnica : FinansijskaUsluga
     {
-        public int ID_Uplate { get; set; }
         public long BrojRacuna { get; set; }
-    
-        public virtual FinansijskaUsluga FinansijskaUsluga { get; set; }
     }
 }

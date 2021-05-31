@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PostaGUI.View"
         xmlns:DatabaseModel="clr-namespace:DatabaseModel;assembly=DatabaseModel" x:Class="PostaGUI.View.PostNetView"
         mc:Ignorable="d"
-        Height="450" Width="800" Loaded="UserControl_Loaded">
+        Height="585" Width="Auto" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <CollectionViewSource x:Key="postNetViewSource" d:DesignSource="{d:DesignInstance {x:Type DatabaseModel:PostNet}, CreateList=True}"/>
         <RoutedUICommand x:Key="DeleteCommand" Text="Izbrisi"/>
@@ -18,12 +18,22 @@
         <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler"/>
         <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
     </UserControl.CommandBindings>
-    <Grid DataContext="{StaticResource postNetViewSource}">
+    <Grid DataContext="{StaticResource postNetViewSource}" Margin="0,0,0,-134" Height="Auto" VerticalAlignment="Top">
 
-        <DataGrid x:Name="postNetDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,316" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="postNetDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,445" Width="Auto" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="brojTelefonaColumn" Width="SizeToHeader" Header="Broj Telefona" Binding="{Binding BrojTelefona}"/>
                 <DataGridTextColumn x:Name="iD_UplateColumn" Width="SizeToHeader" Header="ID Uplate" Binding="{Binding ID_Uplate}"/>
+                <DataGridTextColumn x:Name="brojColumn" Width="SizeToHeader" Header="Broj" Binding="{Binding Broj}"/>
+                <DataGridTextColumn x:Name="gradColumn" Width="SizeToHeader" Header="Grad" Binding="{Binding Grad}"/>
+                <DataGridTextColumn x:Name="iznosColumn" Width="SizeToHeader" Header="Iznos" Binding="{Binding Iznos}"/>
+                <DataGridTextColumn x:Name="posiljalacImeColumn" Width="SizeToHeader" Header="Posiljalac Ime" Binding="{Binding PosiljalacIme}"/>
+                <DataGridTextColumn x:Name="posiljalacPrezimeColumn" Width="SizeToHeader" Header="Posiljalac Prezime" Binding="{Binding PosiljalacPrezime}"/>
+                <DataGridTextColumn x:Name="primalacImeColumn" Width="SizeToHeader" Header="Primalac Ime" Binding="{Binding PrimalacIme}"/>
+                <DataGridTextColumn x:Name="primalacPrezimeColumn" Width="SizeToHeader" Header="Primalac Prezime" Binding="{Binding PrimalacPrezime}"/>
+                <DataGridTextColumn x:Name="sluzbenikJMBG_RadnikaColumn" Width="SizeToHeader" Header="Sluzbenik JMBG Radnika" Binding="{Binding SluzbenikJMBG_Radnika}"/>
+                <DataGridTextColumn x:Name="sluzbenikPostanskiBrojColumn" Width="SizeToHeader" Header="Sluzbenik Postanski Broj" Binding="{Binding SluzbenikPostanskiBroj}"/>
+                <DataGridTextColumn x:Name="ulicaColumn" Width="SizeToHeader" Header="Ulica" Binding="{Binding Ulica}"/>
+                <DataGridTextColumn x:Name="brojTelefonaColumn" Width="SizeToHeader" Header="Broj Telefona" Binding="{Binding BrojTelefona}"/>
                 <DataGridTextColumn x:Name="jMBG_PrimaocaColumn" Width="SizeToHeader" Header="JMBG Primaoca" Binding="{Binding JMBG_Primaoca}"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -36,15 +46,46 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
             </Grid.RowDefinitions>
-            <Label Content="Broj Telefona:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="brojTelefonaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding BrojTelefona, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="ID Uplate:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="iD_UplateTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding ID_Uplate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="JMBG Primaoca:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="jMBG_PrimaocaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding JMBG_Primaoca, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Broj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="brojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Broj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Grad:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <TextBox x:Name="gradTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Grad, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="ID Uplate:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <TextBox x:Name="iD_UplateTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding ID_Uplate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Iznos:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <TextBox x:Name="iznosTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Iznos, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Posiljalac Ime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+            <TextBox x:Name="posiljalacImeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding PosiljalacIme, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Posiljalac Prezime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+            <TextBox x:Name="posiljalacPrezimeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding PosiljalacPrezime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Primalac Ime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
+            <TextBox x:Name="primalacImeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="6" Text="{Binding PrimalacIme, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Primalac Prezime:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
+            <TextBox x:Name="primalacPrezimeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="7" Text="{Binding PrimalacPrezime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Sluzbenik JMBG Radnika:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Center"/>
+            <TextBox x:Name="sluzbenikJMBG_RadnikaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="8" Text="{Binding SluzbenikJMBG_Radnika, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Sluzbenik Postanski Broj:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="9" VerticalAlignment="Center"/>
+            <TextBox x:Name="sluzbenikPostanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="9" Text="{Binding SluzbenikPostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Ulica:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="10" VerticalAlignment="Center"/>
+            <TextBox x:Name="ulicaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="10" Text="{Binding Ulica, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Broj Telefona:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="11" VerticalAlignment="Center"/>
+            <TextBox x:Name="brojTelefonaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="11" Text="{Binding BrojTelefona, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="JMBG Primaoca:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="12" VerticalAlignment="Center"/>
+            <TextBox x:Name="jMBG_PrimaocaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="12" Text="{Binding JMBG_Primaoca, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <StackPanel Orientation="Vertical" Margin="384,171,165,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postNetViewSource}">
+        <StackPanel Orientation="Vertical" Margin="289,158,671,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource postNetViewSource}">
 
             <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
             <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>

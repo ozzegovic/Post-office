@@ -45,11 +45,11 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.Pakets.Load();
+                _context.PostanskeUsluge_Paket.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                paketViewSource.Source = _context.Pakets.Local;
+                paketViewSource.Source = _context.PostanskeUsluge_Paket.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -57,19 +57,19 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = paketViewSource.View.CurrentItem as Paket;
 
-            var paket = (from c in _context.Pakets
-                           where c.ID_Posiljke == cur.ID_Posiljke
+            var paket = (from c in _context.PostanskeUsluge_Paket
+                         where c.ID_Posiljke == cur.ID_Posiljke
                            select c).FirstOrDefault();
 
             if (paket != null)
             {
                 try
                 {
-                    _context.Pakets.Remove(paket);
+                    _context.PostanskeUsluge_Paket.Remove(paket);
                     _context.SaveChanges();
-                    _context.Pakets.Load();
+                    _context.PostanskeUsluge_Paket.Load();
 
-                    paketViewSource.Source = _context.Pakets.Local;
+                    paketViewSource.Source = _context.PostanskeUsluge_Paket.Local;
                     paketViewSource.View.Refresh();
 
 
@@ -89,7 +89,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = paketViewSource.View.CurrentItem as Paket;
 
-            var paket = (from c in _context.Pakets
+            var paket = (from c in _context.PostanskeUsluge_Paket
                          where c.ID_Posiljke == cur.ID_Posiljke
                          select c).FirstOrDefault();
 
@@ -98,10 +98,24 @@ namespace PostaGUI.View
                 try
                 {
                     paket.Tezina = Convert.ToInt32(tezinaTextBox.Text);
-                    _context.SaveChanges();
-                    _context.Pakets.Load();
+                    paket.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
+                    paket.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    paket.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    paket.PrimalacIme = primalacImeTextBox.Text;
+                    paket.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    paket.Grad = gradTextBox.Text;
+                    paket.Ulica = ulicaTextBox.Text;
+                    paket.Broj = brojTextBox.Text;
+                    paket.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    paket.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+                    paket.PostarJMBG_Radnika = Convert.ToInt32(postarJMBG_RadnikaTextBox.Text);
+                    paket.PostarPostanskiBroj = Convert.ToInt32(postarPostanskiBrojTextBox.Text);
+                    paket.SkladisteId_Skladiste = Convert.ToInt32(skladisteId_SkladisteTextBox.Text);
 
-                    paketViewSource.Source = _context.Pakets.Local;
+                    _context.SaveChanges();
+                    _context.PostanskeUsluge_Paket.Load();
+
+                    paketViewSource.Source = _context.PostanskeUsluge_Paket.Local;
                     paketViewSource.View.Refresh();
 
 
@@ -126,11 +140,25 @@ namespace PostaGUI.View
                 try
                 {
                     paket.Tezina = Convert.ToInt32(tezinaTextBox.Text);
-                    _context.Pakets.Add(paket);
-                    _context.SaveChanges();
-                    _context.Pakets.Load();
+                    paket.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
+                    paket.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    paket.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    paket.PrimalacIme = primalacImeTextBox.Text;
+                    paket.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    paket.Grad = gradTextBox.Text;
+                    paket.Ulica = ulicaTextBox.Text;
+                    paket.Broj = brojTextBox.Text;
+                    paket.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    paket.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+                    paket.PostarJMBG_Radnika = Convert.ToInt32(postarJMBG_RadnikaTextBox.Text);
+                    paket.PostarPostanskiBroj = Convert.ToInt32(postarPostanskiBrojTextBox.Text);
+                    paket.SkladisteId_Skladiste = Convert.ToInt32(skladisteId_SkladisteTextBox.Text);
 
-                    paketViewSource.Source = _context.Pakets.Local;
+                    _context.PostanskeUsluge_Paket.Add(paket);
+                    _context.SaveChanges();
+                    _context.PostanskeUsluge_Paket.Load();
+
+                    paketViewSource.Source = _context.PostanskeUsluge_Paket.Local;
                     paketViewSource.View.Refresh();
 
 

@@ -22,8 +22,8 @@ namespace PostaGUI
     {
         public MainWindow()
         {
-
             InitializeComponent();
+
         }
     }
 }

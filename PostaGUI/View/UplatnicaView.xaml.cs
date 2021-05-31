@@ -46,11 +46,11 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.Uplatnicas.Load();
+                _context.FinansijskaUslugas_Uplatnica.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                uplatnicaViewSource.Source = _context.Uplatnicas.Local;
+                uplatnicaViewSource.Source = _context.FinansijskaUslugas_Uplatnica.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = uplatnicaViewSource.View.CurrentItem as Uplatnica;
 
-            var uplatnica = (from c in _context.Uplatnicas
+            var uplatnica = (from c in _context.FinansijskaUslugas_Uplatnica
                              where c.ID_Uplate == cur.ID_Uplate
                              select c).FirstOrDefault();
 
@@ -66,12 +66,12 @@ namespace PostaGUI.View
             {
                 try
                 {
-                    _context.Uplatnicas.Remove(uplatnica);
+                    _context.FinansijskaUslugas_Uplatnica.Remove(uplatnica);
 
                     _context.SaveChanges();
-                    _context.Uplatnicas.Load();
+                    _context.FinansijskaUslugas_Uplatnica.Load();
 
-                    uplatnicaViewSource.Source = _context.Uplatnicas.Local;
+                    uplatnicaViewSource.Source = _context.FinansijskaUslugas_Uplatnica.Local;
                     uplatnicaViewSource.View.Refresh();
 
 
@@ -92,7 +92,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = uplatnicaViewSource.View.CurrentItem as Uplatnica;
 
-            var uplatnica = (from c in _context.Uplatnicas
+            var uplatnica = (from c in _context.FinansijskaUslugas_Uplatnica
                              where c.ID_Uplate == cur.ID_Uplate
                              select c).FirstOrDefault();
 
@@ -101,12 +101,21 @@ namespace PostaGUI.View
                 try
                 {
                     uplatnica.BrojRacuna = Convert.ToInt32(brojRacunaTextBox.Text);
-
+                    uplatnica.Iznos = Convert.ToDouble(iznosTextBox.Text);
+                    uplatnica.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    uplatnica.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    uplatnica.PrimalacIme = primalacImeTextBox.Text;
+                    uplatnica.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    uplatnica.Grad = gradTextBox.Text;
+                    uplatnica.Ulica = ulicaTextBox.Text;
+                    uplatnica.Broj = brojTextBox.Text;
+                    uplatnica.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    uplatnica.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
 
                     _context.SaveChanges();
-                    _context.Uplatnicas.Load();
+                    _context.FinansijskaUslugas_Uplatnica.Load();
 
-                    uplatnicaViewSource.Source = _context.Uplatnicas.Local;
+                    uplatnicaViewSource.Source = _context.FinansijskaUslugas_Uplatnica.Local;
                     uplatnicaViewSource.View.Refresh();
 
 
@@ -130,12 +139,22 @@ namespace PostaGUI.View
                 try
                 {
                     uplatnica.BrojRacuna = Convert.ToInt32(brojRacunaTextBox.Text);
-                    
+
+                    uplatnica.Iznos = Convert.ToDouble(iznosTextBox.Text);
+                    uplatnica.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    uplatnica.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+                    uplatnica.PrimalacIme = primalacImeTextBox.Text;
+                    uplatnica.PrimalacPrezime = primalacPrezimeTextBox.Text;
+                    uplatnica.Grad = gradTextBox.Text;
+                    uplatnica.Ulica = ulicaTextBox.Text;
+                    uplatnica.Broj = brojTextBox.Text;
+                    uplatnica.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    uplatnica.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
 
                     _context.SaveChanges();
-                    _context.Uplatnicas.Load();
+                    _context.FinansijskaUslugas_Uplatnica.Load();
 
-                    uplatnicaViewSource.Source = _context.Uplatnicas.Local;
+                    uplatnicaViewSource.Source = _context.FinansijskaUslugas_Uplatnica.Local;
                     uplatnicaViewSource.View.Refresh();
 
 

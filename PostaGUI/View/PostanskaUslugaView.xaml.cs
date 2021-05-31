@@ -109,7 +109,11 @@ namespace PostaGUI.View
                     postanskaUsluga.Grad = gradTextBox.Text;
                     postanskaUsluga.Ulica = ulicaTextBox.Text;
                     postanskaUsluga.Broj = brojTextBox.Text;
-
+                    postanskaUsluga.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
+                    postanskaUsluga.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
+                    postanskaUsluga.PostarJMBG_Radnika = Convert.ToInt32(postarJMBG_RadnikaTextBox.Text);
+                    postanskaUsluga.PostarPostanskiBroj = Convert.ToInt32(postarPostanskiBrojTextBox.Text);
+                    postanskaUsluga.SkladisteId_Skladiste = Convert.ToInt32(skladisteId_SkladisteTextBox.Text);
                     _context.SaveChanges();
                     _context.PostanskeUsluge.Load();
 
@@ -132,38 +136,38 @@ namespace PostaGUI.View
         {
             _context = new PostaDbContainer();
 
-            PostanskaUsluga postanskaUsluga = new PostanskaUsluga();
+            //PostanskaUsluga postanskaUsluga = new PostanskaUsluga();
 
-            if (postanskaUsluga != null)
-            {
-                try
-                {
-                    postanskaUsluga.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    postanskaUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
-                    postanskaUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
-                    postanskaUsluga.PrimalacIme = primalacImeTextBox.Text;
-                    postanskaUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
-                    postanskaUsluga.Grad = gradTextBox.Text;
-                    postanskaUsluga.Ulica = ulicaTextBox.Text;
-                    postanskaUsluga.Broj = brojTextBox.Text;
+            //if (postanskaUsluga != null)
+            //{
+            //    try
+            //    {
+            //        postanskaUsluga.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
+            //        postanskaUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
+            //        postanskaUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+            //        postanskaUsluga.PrimalacIme = primalacImeTextBox.Text;
+            //        postanskaUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
+            //        postanskaUsluga.Grad = gradTextBox.Text;
+            //        postanskaUsluga.Ulica = ulicaTextBox.Text;
+            //        postanskaUsluga.Broj = brojTextBox.Text;
 
-                    _context.PostanskeUsluge.Add(postanskaUsluga);
-                    _context.SaveChanges();
-                    _context.PostanskeUsluge.Load();
+            //        _context.PostanskeUsluge.Add(postanskaUsluga);
+            //        _context.SaveChanges();
+            //        _context.PostanskeUsluge.Load();
 
-                    postanskaUslugaViewSource.Source = _context.PostanskeUsluge.Local;
-                    postanskaUslugaViewSource.View.Refresh();
+            //        postanskaUslugaViewSource.Source = _context.PostanskeUsluge.Local;
+            //        postanskaUslugaViewSource.View.Refresh();
 
 
-                }
-                catch (Exception ex)
-                {
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-                    MessageBox.Show("Trenutno nije moguce dodati postansku uslugu.", "Error");
-                    return;
-                }
+            //        MessageBox.Show("Trenutno nije moguce dodati postansku uslugu.", "Error");
+            //        return;
+            //    }
 
-            }
+            //}
 
         }
     }

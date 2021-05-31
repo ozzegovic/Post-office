@@ -46,11 +46,11 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.Postari.Load();
+                _context.Radnici_Postar.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                postarViewSource.Source = _context.Postari.Local;
+                postarViewSource.Source = _context.Radnici_Postar.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -58,20 +58,20 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = postarViewSource.View.CurrentItem as Postar;
 
-            var radnik = (from c in _context.Postari
+            var postar = (from c in _context.Radnici_Postar
                           where c.JMBG_Radnika == cur.JMBG_Radnika
                           select c).FirstOrDefault();
 
-            if (radnik != null)
+            if (postar != null)
             {
                 try
                 {
-                    _context.Postari.Remove(radnik);
+                    _context.Radnici_Postar.Remove(postar);
 
                     _context.SaveChanges();
-                    _context.Postari.Load();
+                    _context.Radnici_Postar.Load();
 
-                    postarViewSource.Source = _context.Postari.Local;
+                    postarViewSource.Source = _context.Radnici_Postar.Local;
                     postarViewSource.View.Refresh();
 
 
@@ -91,21 +91,25 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = postarViewSource.View.CurrentItem as Postar;
 
-            var radnik = (from c in _context.Postari
+            var postar = (from c in _context.Radnici_Postar
                           where c.JMBG_Radnika == cur.JMBG_Radnika
                           select c).FirstOrDefault();
 
-            if (radnik != null)
+            if (postar != null)
             {
                 try
                 {
 
-                    radnik.DeoGrada = deoGradaTextBox.Text;
+                    postar.DeoGrada = deoGradaTextBox.Text;
+                    postar.Ime = imeTextBox.Text;
+                    postar.Prezime = prezimeTextBox.Text;
+                    postar.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
+                    postar.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
 
                     _context.SaveChanges();
-                    _context.Postari.Load();
+                    _context.Radnici_Postar.Load();
 
-                    postarViewSource.Source = _context.Postari.Local;
+                    postarViewSource.Source = _context.Radnici_Postar.Local;
                     postarViewSource.View.Refresh();
 
 
@@ -133,12 +137,15 @@ namespace PostaGUI.View
 
                     postar.DeoGrada = deoGradaTextBox.Text;
                     postar.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
-                    postar.PostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
-                    _context.Postari.Add(postar);
-                    _context.SaveChanges();
-                    _context.Postari.Load();
+                    postar.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
+                    postar.Ime = imeTextBox.Text;
+                    postar.Prezime = prezimeTextBox.Text;
 
-                    postarViewSource.Source = _context.Postari.Local;
+                    _context.Radnici_Postar.Add(postar);
+                    _context.SaveChanges();
+                    _context.Radnici_Postar.Load();
+                 
+                    postarViewSource.Source = _context.Radnici_Postar.Local;
                     postarViewSource.View.Refresh();
 
 

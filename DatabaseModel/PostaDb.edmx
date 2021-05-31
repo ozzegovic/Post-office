@@ -8,26 +8,18 @@
   <EntityContainer Name="PostaDbStoreContainer">
     <EntitySet Name="Skladista" EntityType="PostaDb.Store.Skladista" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Radnici" EntityType="PostaDb.Store.Radnici" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Postari" EntityType="PostaDb.Store.Postari" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Poste" EntityType="PostaDb.Store.Poste" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Sluzbenici" EntityType="PostaDb.Store.Sluzbenici" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PostanskeUsluge" EntityType="PostaDb.Store.PostanskeUsluge" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Pakets" EntityType="PostaDb.Store.Pakets" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Pismoes" EntityType="PostaDb.Store.Pismoes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FinansijskaUslugas" EntityType="PostaDb.Store.FinansijskaUslugas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Uplatnicas" EntityType="PostaDb.Store.Uplatnicas" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PostNets" EntityType="PostaDb.Store.PostNets" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="PostarRadnik" Association="PostaDb.Store.PostarRadnik">
-      <End Role="Postar" EntitySet="Postari" />
-      <End Role="Radnik" EntitySet="Radnici" />
-    </AssociationSet>
+    <EntitySet Name="Radnici_Sluzbenik" EntityType="PostaDb.Store.Radnici_Sluzbenik" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Radnici_Postar" EntityType="PostaDb.Store.Radnici_Postar" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PostanskeUsluge_Paket" EntityType="PostaDb.Store.PostanskeUsluge_Paket" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PostanskeUsluge_Pismo" EntityType="PostaDb.Store.PostanskeUsluge_Pismo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FinansijskaUslugas_Uplatnica" EntityType="PostaDb.Store.FinansijskaUslugas_Uplatnica" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FinansijskaUslugas_PostNet" EntityType="PostaDb.Store.FinansijskaUslugas_PostNet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="PostaRadnik" Association="PostaDb.Store.PostaRadnik">
       <End Role="Posta" EntitySet="Poste" />
       <End Role="Radnik" EntitySet="Radnici" />
-    </AssociationSet>
-    <AssociationSet Name="RadnikSluzbenik" Association="PostaDb.Store.RadnikSluzbenik">
-      <End Role="Radnik" EntitySet="Radnici" />
-      <End Role="Sluzbenik" EntitySet="Sluzbenici" />
     </AssociationSet>
     <AssociationSet Name="SkladistePosta" Association="PostaDb.Store.SkladistePosta">
       <End Role="Skladiste" EntitySet="Skladista" />
@@ -39,31 +31,39 @@
     </AssociationSet>
     <AssociationSet Name="PostanskaUslugaSluzbenik" Association="PostaDb.Store.PostanskaUslugaSluzbenik">
       <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-      <End Role="Sluzbenik" EntitySet="Sluzbenici" />
+      <End Role="Sluzbenik" EntitySet="Radnici_Sluzbenik" />
     </AssociationSet>
     <AssociationSet Name="PostanskaUslugaPostar" Association="PostaDb.Store.PostanskaUslugaPostar">
       <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-      <End Role="Postar" EntitySet="Postari" />
-    </AssociationSet>
-    <AssociationSet Name="PostanskaUslugaPaket" Association="PostaDb.Store.PostanskaUslugaPaket">
-      <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-      <End Role="Paket" EntitySet="Pakets" />
-    </AssociationSet>
-    <AssociationSet Name="PismoPostanskaUsluga" Association="PostaDb.Store.PismoPostanskaUsluga">
-      <End Role="Pismo" EntitySet="Pismoes" />
-      <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
+      <End Role="Postar" EntitySet="Radnici_Postar" />
     </AssociationSet>
     <AssociationSet Name="FinansijskaUslugaSluzbenik" Association="PostaDb.Store.FinansijskaUslugaSluzbenik">
       <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
-      <End Role="Sluzbenik" EntitySet="Sluzbenici" />
+      <End Role="Sluzbenik" EntitySet="Radnici_Sluzbenik" />
     </AssociationSet>
-    <AssociationSet Name="FinansijskaUslugaUplatnica" Association="PostaDb.Store.FinansijskaUslugaUplatnica">
-      <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
-      <End Role="Uplatnica" EntitySet="Uplatnicas" />
+    <AssociationSet Name="FK_Sluzbenik_inherits_Radnik" Association="PostaDb.Store.FK_Sluzbenik_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radnici" />
+      <End Role="Sluzbenik" EntitySet="Radnici_Sluzbenik" />
     </AssociationSet>
-    <AssociationSet Name="PostNetFinansijskaUsluga" Association="PostaDb.Store.PostNetFinansijskaUsluga">
-      <End Role="PostNet" EntitySet="PostNets" />
+    <AssociationSet Name="FK_Postar_inherits_Radnik" Association="PostaDb.Store.FK_Postar_inherits_Radnik">
+      <End Role="Radnik" EntitySet="Radnici" />
+      <End Role="Postar" EntitySet="Radnici_Postar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paket_inherits_PostanskaUsluga" Association="PostaDb.Store.FK_Paket_inherits_PostanskaUsluga">
+      <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
+      <End Role="Paket" EntitySet="PostanskeUsluge_Paket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pismo_inherits_PostanskaUsluga" Association="PostaDb.Store.FK_Pismo_inherits_PostanskaUsluga">
+      <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
+      <End Role="Pismo" EntitySet="PostanskeUsluge_Pismo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Uplatnica_inherits_FinansijskaUsluga" Association="PostaDb.Store.FK_Uplatnica_inherits_FinansijskaUsluga">
       <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
+      <End Role="Uplatnica" EntitySet="FinansijskaUslugas_Uplatnica" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostNet_inherits_FinansijskaUsluga" Association="PostaDb.Store.FK_PostNet_inherits_FinansijskaUsluga">
+      <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
+      <End Role="PostNet" EntitySet="FinansijskaUslugas_PostNet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Skladista">
@@ -86,15 +86,6 @@
     <Property Name="Prezime" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PostaPostanskiBroj" Type="decimal" Nullable="false" />
   </EntityType>
-  <EntityType Name="Postari">
-    <Key>
-      <PropertyRef Name="JMBG_Radnika" />
-      <PropertyRef Name="PostanskiBroj" />
-    </Key>
-    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
-    <Property Name="PostanskiBroj" Type="decimal" Nullable="false" />
-    <Property Name="DeoGrada" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
   <EntityType Name="Poste">
     <Key>
       <PropertyRef Name="PostanskiBroj" />
@@ -103,15 +94,6 @@
     <Property Name="Grad" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Ulica" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Sluzbenici">
-    <Key>
-      <PropertyRef Name="JMBG_Radnika" />
-      <PropertyRef Name="PostanskiBroj" />
-    </Key>
-    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
-    <Property Name="PostanskiBroj" Type="decimal" Nullable="false" />
-    <Property Name="Odeljenje" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PostanskeUsluge">
     <Key>
@@ -132,20 +114,6 @@
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PostanskiBrojOdredista" Type="decimal" Nullable="false" />
   </EntityType>
-  <EntityType Name="Pakets">
-    <Key>
-      <PropertyRef Name="ID_Posiljke" />
-    </Key>
-    <Property Name="ID_Posiljke" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Tezina" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Pismoes">
-    <Key>
-      <PropertyRef Name="ID_Posiljke" />
-    </Key>
-    <Property Name="ID_Posiljke" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Preporuceno" Type="bit" Nullable="false" />
-  </EntityType>
   <EntityType Name="FinansijskaUslugas">
     <Key>
       <PropertyRef Name="ID_Uplate" />
@@ -162,35 +130,53 @@
     <Property Name="Broj" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Iznos" Type="float" Nullable="false" />
   </EntityType>
-  <EntityType Name="Uplatnicas">
+  <EntityType Name="Radnici_Sluzbenik">
     <Key>
-      <PropertyRef Name="ID_Uplate" />
+      <PropertyRef Name="JMBG_Radnika" />
+      <PropertyRef Name="PostaPostanskiBroj" />
     </Key>
-    <Property Name="ID_Uplate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BrojRacuna" Type="bigint" Nullable="false" />
+    <Property Name="Odeljenje" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
+    <Property Name="PostaPostanskiBroj" Type="decimal" Nullable="false" />
   </EntityType>
-  <EntityType Name="PostNets">
+  <EntityType Name="Radnici_Postar">
+    <Key>
+      <PropertyRef Name="JMBG_Radnika" />
+      <PropertyRef Name="PostaPostanskiBroj" />
+    </Key>
+    <Property Name="DeoGrada" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="JMBG_Radnika" Type="int" Nullable="false" />
+    <Property Name="PostaPostanskiBroj" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostanskeUsluge_Paket">
+    <Key>
+      <PropertyRef Name="ID_Posiljke" />
+    </Key>
+    <Property Name="Tezina" Type="float" Nullable="false" />
+    <Property Name="ID_Posiljke" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostanskeUsluge_Pismo">
+    <Key>
+      <PropertyRef Name="ID_Posiljke" />
+    </Key>
+    <Property Name="Preporuceno" Type="bit" Nullable="false" />
+    <Property Name="ID_Posiljke" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FinansijskaUslugas_Uplatnica">
     <Key>
       <PropertyRef Name="ID_Uplate" />
     </Key>
-    <Property Name="ID_Uplate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrojRacuna" Type="bigint" Nullable="false" />
+    <Property Name="ID_Uplate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FinansijskaUslugas_PostNet">
+    <Key>
+      <PropertyRef Name="ID_Uplate" />
+    </Key>
     <Property Name="BrojTelefona" Type="int" Nullable="false" />
     <Property Name="JMBG_Primaoca" Type="int" Nullable="false" />
+    <Property Name="ID_Uplate" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="PostarRadnik">
-    <End Role="Postar" Type="PostaDb.Store.Postari" Multiplicity="0..1" />
-    <End Role="Radnik" Type="PostaDb.Store.Radnici" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Radnik">
-        <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostaPostanskiBroj" />
-      </Principal>
-      <Dependent Role="Postar">
-        <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostanskiBroj" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="PostaRadnik">
     <End Role="Posta" Type="PostaDb.Store.Poste" Multiplicity="1" />
     <End Role="Radnik" Type="PostaDb.Store.Radnici" Multiplicity="*" />
@@ -200,20 +186,6 @@
       </Principal>
       <Dependent Role="Radnik">
         <PropertyRef Name="PostaPostanskiBroj" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RadnikSluzbenik">
-    <End Role="Radnik" Type="PostaDb.Store.Radnici" Multiplicity="1" />
-    <End Role="Sluzbenik" Type="PostaDb.Store.Sluzbenici" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Radnik">
-        <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostaPostanskiBroj" />
-      </Principal>
-      <Dependent Role="Sluzbenik">
-        <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostanskiBroj" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -243,11 +215,11 @@
   </Association>
   <Association Name="PostanskaUslugaSluzbenik">
     <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="*" />
-    <End Role="Sluzbenik" Type="PostaDb.Store.Sluzbenici" Multiplicity="1" />
+    <End Role="Sluzbenik" Type="PostaDb.Store.Radnici_Sluzbenik" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Sluzbenik">
         <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostanskiBroj" />
+        <PropertyRef Name="PostaPostanskiBroj" />
       </Principal>
       <Dependent Role="PostanskaUsluga">
         <PropertyRef Name="SluzbenikJMBG_Radnika" />
@@ -257,11 +229,11 @@
   </Association>
   <Association Name="PostanskaUslugaPostar">
     <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="*" />
-    <End Role="Postar" Type="PostaDb.Store.Postari" Multiplicity="1" />
+    <End Role="Postar" Type="PostaDb.Store.Radnici_Postar" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Postar">
         <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostanskiBroj" />
+        <PropertyRef Name="PostaPostanskiBroj" />
       </Principal>
       <Dependent Role="PostanskaUsluga">
         <PropertyRef Name="PostarJMBG_Radnika" />
@@ -269,9 +241,57 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PostanskaUslugaPaket">
-    <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="1" />
-    <End Role="Paket" Type="PostaDb.Store.Pakets" Multiplicity="0..1" />
+  <Association Name="FinansijskaUslugaSluzbenik">
+    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="*" />
+    <End Role="Sluzbenik" Type="PostaDb.Store.Radnici_Sluzbenik" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Sluzbenik">
+        <PropertyRef Name="JMBG_Radnika" />
+        <PropertyRef Name="PostaPostanskiBroj" />
+      </Principal>
+      <Dependent Role="FinansijskaUsluga">
+        <PropertyRef Name="SluzbenikJMBG_Radnika" />
+        <PropertyRef Name="SluzbenikPostanskiBroj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sluzbenik_inherits_Radnik">
+    <End Role="Radnik" Type="PostaDb.Store.Radnici" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sluzbenik" Type="PostaDb.Store.Radnici_Sluzbenik" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG_Radnika" />
+        <PropertyRef Name="PostaPostanskiBroj" />
+      </Principal>
+      <Dependent Role="Sluzbenik">
+        <PropertyRef Name="JMBG_Radnika" />
+        <PropertyRef Name="PostaPostanskiBroj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Postar_inherits_Radnik">
+    <End Role="Radnik" Type="PostaDb.Store.Radnici" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Postar" Type="PostaDb.Store.Radnici_Postar" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Radnik">
+        <PropertyRef Name="JMBG_Radnika" />
+        <PropertyRef Name="PostaPostanskiBroj" />
+      </Principal>
+      <Dependent Role="Postar">
+        <PropertyRef Name="JMBG_Radnika" />
+        <PropertyRef Name="PostaPostanskiBroj" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paket_inherits_PostanskaUsluga">
+    <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Paket" Type="PostaDb.Store.PostanskeUsluge_Paket" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PostanskaUsluga">
         <PropertyRef Name="ID_Posiljke" />
@@ -281,9 +301,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PismoPostanskaUsluga">
-    <End Role="Pismo" Type="PostaDb.Store.Pismoes" Multiplicity="0..1" />
-    <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="1" />
+  <Association Name="FK_Pismo_inherits_PostanskaUsluga">
+    <End Role="PostanskaUsluga" Type="PostaDb.Store.PostanskeUsluge" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pismo" Type="PostaDb.Store.PostanskeUsluge_Pismo" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="PostanskaUsluga">
         <PropertyRef Name="ID_Posiljke" />
@@ -293,23 +315,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FinansijskaUslugaSluzbenik">
-    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="*" />
-    <End Role="Sluzbenik" Type="PostaDb.Store.Sluzbenici" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Sluzbenik">
-        <PropertyRef Name="JMBG_Radnika" />
-        <PropertyRef Name="PostanskiBroj" />
-      </Principal>
-      <Dependent Role="FinansijskaUsluga">
-        <PropertyRef Name="SluzbenikJMBG_Radnika" />
-        <PropertyRef Name="SluzbenikPostanskiBroj" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FinansijskaUslugaUplatnica">
-    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="1" />
-    <End Role="Uplatnica" Type="PostaDb.Store.Uplatnicas" Multiplicity="0..1" />
+  <Association Name="FK_Uplatnica_inherits_FinansijskaUsluga">
+    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Uplatnica" Type="PostaDb.Store.FinansijskaUslugas_Uplatnica" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="FinansijskaUsluga">
         <PropertyRef Name="ID_Uplate" />
@@ -319,9 +329,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PostNetFinansijskaUsluga">
-    <End Role="PostNet" Type="PostaDb.Store.PostNets" Multiplicity="0..1" />
-    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="1" />
+  <Association Name="FK_PostNet_inherits_FinansijskaUsluga">
+    <End Role="FinansijskaUsluga" Type="PostaDb.Store.FinansijskaUslugas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PostNet" Type="PostaDb.Store.FinansijskaUslugas_PostNet" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="FinansijskaUsluga">
         <PropertyRef Name="ID_Uplate" />
@@ -338,20 +350,10 @@
         <EntityContainer Name="PostaDbContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Skladista" EntityType="PostaDb.Skladiste" />
           <EntitySet Name="Radnici" EntityType="PostaDb.Radnik" />
-          <EntitySet Name="Postari" EntityType="PostaDb.Postar" />
-          <AssociationSet Name="PostarRadnik" Association="PostaDb.PostarRadnik">
-            <End Role="Postar" EntitySet="Postari" />
-            <End Role="Radnik" EntitySet="Radnici" />
-          </AssociationSet>
           <EntitySet Name="Poste" EntityType="PostaDb.Posta" />
           <AssociationSet Name="PostaRadnik" Association="PostaDb.PostaRadnik">
             <End Role="Posta" EntitySet="Poste" />
             <End Role="Radnik" EntitySet="Radnici" />
-          </AssociationSet>
-          <EntitySet Name="Sluzbenici" EntityType="PostaDb.Sluzbenik" />
-          <AssociationSet Name="RadnikSluzbenik" Association="PostaDb.RadnikSluzbenik">
-            <End Role="Radnik" EntitySet="Radnici" />
-            <End Role="Sluzbenik" EntitySet="Sluzbenici" />
           </AssociationSet>
           <AssociationSet Name="SkladistePosta" Association="PostaDb.SkladistePosta">
             <End Role="Skladiste" EntitySet="Skladista" />
@@ -364,36 +366,16 @@
           </AssociationSet>
           <AssociationSet Name="PostanskaUslugaSluzbenik" Association="PostaDb.PostanskaUslugaSluzbenik">
             <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-            <End Role="Sluzbenik" EntitySet="Sluzbenici" />
+            <End Role="Sluzbenik" EntitySet="Radnici" />
           </AssociationSet>
           <AssociationSet Name="PostanskaUslugaPostar" Association="PostaDb.PostanskaUslugaPostar">
             <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-            <End Role="Postar" EntitySet="Postari" />
-          </AssociationSet>
-          <EntitySet Name="Pakets" EntityType="PostaDb.Paket" />
-          <EntitySet Name="Pismoes" EntityType="PostaDb.Pismo" />
-          <AssociationSet Name="PostanskaUslugaPaket" Association="PostaDb.PostanskaUslugaPaket">
-            <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
-            <End Role="Paket" EntitySet="Pakets" />
-          </AssociationSet>
-          <AssociationSet Name="PismoPostanskaUsluga" Association="PostaDb.PismoPostanskaUsluga">
-            <End Role="Pismo" EntitySet="Pismoes" />
-            <End Role="PostanskaUsluga" EntitySet="PostanskeUsluge" />
+            <End Role="Postar" EntitySet="Radnici" />
           </AssociationSet>
           <EntitySet Name="FinansijskaUslugas" EntityType="PostaDb.FinansijskaUsluga" />
           <AssociationSet Name="FinansijskaUslugaSluzbenik" Association="PostaDb.FinansijskaUslugaSluzbenik">
             <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
-            <End Role="Sluzbenik" EntitySet="Sluzbenici" />
-          </AssociationSet>
-          <EntitySet Name="Uplatnicas" EntityType="PostaDb.Uplatnica" />
-          <AssociationSet Name="FinansijskaUslugaUplatnica" Association="PostaDb.FinansijskaUslugaUplatnica">
-            <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
-            <End Role="Uplatnica" EntitySet="Uplatnicas" />
-          </AssociationSet>
-          <EntitySet Name="PostNets" EntityType="PostaDb.PostNet" />
-          <AssociationSet Name="PostNetFinansijskaUsluga" Association="PostaDb.PostNetFinansijskaUsluga">
-            <End Role="PostNet" EntitySet="PostNets" />
-            <End Role="FinansijskaUsluga" EntitySet="FinansijskaUslugas" />
+            <End Role="Sluzbenik" EntitySet="Radnici" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Skladiste">
@@ -408,7 +390,7 @@
           <Property Name="Broj" Type="String" Nullable="false" />
           <NavigationProperty Name="PostanskaUslugas" Relationship="PostaDb.SkladistePostanskaUsluga" FromRole="Skladiste" ToRole="PostanskaUsluga" />
         </EntityType>
-        <EntityType Name="Radnik">
+        <EntityType Name="Radnik" Abstract="true">
           <Key>
             <PropertyRef Name="JMBG_Radnika" />
             <PropertyRef Name="PostaPostanskiBroj" />
@@ -416,36 +398,13 @@
           <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Ime" Type="String" Nullable="false" />
           <Property Name="Prezime" Type="String" Nullable="false" />
-          <NavigationProperty Name="Postar" Relationship="PostaDb.PostarRadnik" FromRole="Radnik" ToRole="Postar" />
           <NavigationProperty Name="Posta" Relationship="PostaDb.PostaRadnik" FromRole="Radnik" ToRole="Posta" />
           <Property Name="PostaPostanskiBroj" Type="Decimal" Nullable="false" />
-          <NavigationProperty Name="Sluzbenik" Relationship="PostaDb.RadnikSluzbenik" FromRole="Radnik" ToRole="Sluzbenik" />
         </EntityType>
-        <EntityType Name="Postar">
-          <Key>
-            <PropertyRef Name="JMBG_Radnika" />
-            <PropertyRef Name="PostanskiBroj" />
-          </Key>
-          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="Radnik" Relationship="PostaDb.PostarRadnik" FromRole="Postar" ToRole="Radnik" />
-          <Property Name="PostanskiBroj" Type="Decimal" Nullable="false" />
+        <EntityType Name="Postar" BaseType="PostaDb.Radnik">
           <Property Name="DeoGrada" Type="String" Nullable="false" />
           <NavigationProperty Name="PostanskaUslugas" Relationship="PostaDb.PostanskaUslugaPostar" FromRole="Postar" ToRole="PostanskaUsluga" />
         </EntityType>
-        <Association Name="PostarRadnik">
-          <End Type="PostaDb.Postar" Role="Postar" Multiplicity="0..1" />
-          <End Type="PostaDb.Radnik" Role="Radnik" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Radnik">
-              <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostaPostanskiBroj" />
-            </Principal>
-            <Dependent Role="Postar">
-              <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostanskiBroj" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Posta">
           <Key>
             <PropertyRef Name="PostanskiBroj" />
@@ -469,32 +428,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Sluzbenik">
-          <Key>
-            <PropertyRef Name="JMBG_Radnika" />
-            <PropertyRef Name="PostanskiBroj" />
-          </Key>
-          <Property Name="JMBG_Radnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="Radnik" Relationship="PostaDb.RadnikSluzbenik" FromRole="Sluzbenik" ToRole="Radnik" />
-          <Property Name="PostanskiBroj" Type="Decimal" Nullable="false" />
+        <EntityType Name="Sluzbenik" BaseType="PostaDb.Radnik">
           <Property Name="Odeljenje" Type="String" Nullable="false" />
           <NavigationProperty Name="PostanskaUslugas" Relationship="PostaDb.PostanskaUslugaSluzbenik" FromRole="Sluzbenik" ToRole="PostanskaUsluga" />
           <NavigationProperty Name="FinansijskaUslugas" Relationship="PostaDb.FinansijskaUslugaSluzbenik" FromRole="Sluzbenik" ToRole="FinansijskaUsluga" />
         </EntityType>
-        <Association Name="RadnikSluzbenik">
-          <End Type="PostaDb.Radnik" Role="Radnik" Multiplicity="1" />
-          <End Type="PostaDb.Sluzbenik" Role="Sluzbenik" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Radnik">
-              <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostaPostanskiBroj" />
-            </Principal>
-            <Dependent Role="Sluzbenik">
-              <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostanskiBroj" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="SkladistePosta">
           <End Type="PostaDb.Skladiste" Role="Skladiste" Multiplicity="*" />
           <End Type="PostaDb.Posta" Role="Posta" Multiplicity="0..1" />
@@ -507,7 +445,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="PostanskaUsluga">
+        <EntityType Name="PostanskaUsluga" Abstract="true">
           <Key>
             <PropertyRef Name="ID_Posiljke" />
           </Key>
@@ -520,8 +458,6 @@
           <NavigationProperty Name="Postar" Relationship="PostaDb.PostanskaUslugaPostar" FromRole="PostanskaUsluga" ToRole="Postar" />
           <Property Name="PostarJMBG_Radnika" Type="Int32" Nullable="false" />
           <Property Name="PostarPostanskiBroj" Type="Decimal" Nullable="false" />
-          <NavigationProperty Name="Paket" Relationship="PostaDb.PostanskaUslugaPaket" FromRole="PostanskaUsluga" ToRole="Paket" />
-          <NavigationProperty Name="Pismo" Relationship="PostaDb.PismoPostanskaUsluga" FromRole="PostanskaUsluga" ToRole="Pismo" />
           <Property Name="PosiljalacIme" Type="String" Nullable="false" />
           <Property Name="PosiljalacPrezime" Type="String" Nullable="false" />
           <Property Name="PrimalacIme" Type="String" Nullable="false" />
@@ -549,7 +485,7 @@
           <ReferentialConstraint>
             <Principal Role="Sluzbenik">
               <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostanskiBroj" />
+              <PropertyRef Name="PostaPostanskiBroj" />
             </Principal>
             <Dependent Role="PostanskaUsluga">
               <PropertyRef Name="SluzbenikJMBG_Radnika" />
@@ -563,7 +499,7 @@
           <ReferentialConstraint>
             <Principal Role="Postar">
               <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostanskiBroj" />
+              <PropertyRef Name="PostaPostanskiBroj" />
             </Principal>
             <Dependent Role="PostanskaUsluga">
               <PropertyRef Name="PostarJMBG_Radnika" />
@@ -571,47 +507,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Paket">
-          <Key>
-            <PropertyRef Name="ID_Posiljke" />
-          </Key>
-          <Property Name="ID_Posiljke" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="PostanskaUsluga" Relationship="PostaDb.PostanskaUslugaPaket" FromRole="Paket" ToRole="PostanskaUsluga" />
+        <EntityType Name="Paket" BaseType="PostaDb.PostanskaUsluga">
           <Property Name="Tezina" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="Pismo">
-          <Key>
-            <PropertyRef Name="ID_Posiljke" />
-          </Key>
-          <Property Name="ID_Posiljke" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="PostanskaUsluga" Relationship="PostaDb.PismoPostanskaUsluga" FromRole="Pismo" ToRole="PostanskaUsluga" />
+        <EntityType Name="Pismo" BaseType="PostaDb.PostanskaUsluga">
           <Property Name="Preporuceno" Type="Boolean" Nullable="false" />
         </EntityType>
-        <Association Name="PostanskaUslugaPaket">
-          <End Type="PostaDb.PostanskaUsluga" Role="PostanskaUsluga" Multiplicity="1" />
-          <End Type="PostaDb.Paket" Role="Paket" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PostanskaUsluga">
-              <PropertyRef Name="ID_Posiljke" />
-            </Principal>
-            <Dependent Role="Paket">
-              <PropertyRef Name="ID_Posiljke" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="PismoPostanskaUsluga">
-          <End Type="PostaDb.Pismo" Role="Pismo" Multiplicity="0..1" />
-          <End Type="PostaDb.PostanskaUsluga" Role="PostanskaUsluga" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="PostanskaUsluga">
-              <PropertyRef Name="ID_Posiljke" />
-            </Principal>
-            <Dependent Role="Pismo">
-              <PropertyRef Name="ID_Posiljke" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="FinansijskaUsluga">
+        <EntityType Name="FinansijskaUsluga" Abstract="true">
           <Key>
             <PropertyRef Name="ID_Uplate" />
           </Key>
@@ -619,8 +521,6 @@
           <NavigationProperty Name="Sluzbenik" Relationship="PostaDb.FinansijskaUslugaSluzbenik" FromRole="FinansijskaUsluga" ToRole="Sluzbenik" />
           <Property Name="SluzbenikJMBG_Radnika" Type="Int32" Nullable="false" />
           <Property Name="SluzbenikPostanskiBroj" Type="Decimal" Nullable="false" />
-          <NavigationProperty Name="Uplatnica" Relationship="PostaDb.FinansijskaUslugaUplatnica" FromRole="FinansijskaUsluga" ToRole="Uplatnica" />
-          <NavigationProperty Name="PostNet" Relationship="PostaDb.PostNetFinansijskaUsluga" FromRole="FinansijskaUsluga" ToRole="PostNet" />
           <Property Name="PrimalacIme" Type="String" Nullable="false" />
           <Property Name="PrimalacPrezime" Type="String" Nullable="false" />
           <Property Name="PosiljalacIme" Type="String" Nullable="false" />
@@ -636,7 +536,7 @@
           <ReferentialConstraint>
             <Principal Role="Sluzbenik">
               <PropertyRef Name="JMBG_Radnika" />
-              <PropertyRef Name="PostanskiBroj" />
+              <PropertyRef Name="PostaPostanskiBroj" />
             </Principal>
             <Dependent Role="FinansijskaUsluga">
               <PropertyRef Name="SluzbenikJMBG_Radnika" />
@@ -644,47 +544,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Uplatnica">
-          <Key>
-            <PropertyRef Name="ID_Uplate" />
-          </Key>
-          <Property Name="ID_Uplate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="FinansijskaUsluga" Relationship="PostaDb.FinansijskaUslugaUplatnica" FromRole="Uplatnica" ToRole="FinansijskaUsluga" />
+        <EntityType Name="Uplatnica" BaseType="PostaDb.FinansijskaUsluga">
           <Property Name="BrojRacuna" Type="Int64" Nullable="false" />
         </EntityType>
-        <Association Name="FinansijskaUslugaUplatnica">
-          <End Type="PostaDb.FinansijskaUsluga" Role="FinansijskaUsluga" Multiplicity="1" />
-          <End Type="PostaDb.Uplatnica" Role="Uplatnica" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="FinansijskaUsluga">
-              <PropertyRef Name="ID_Uplate" />
-            </Principal>
-            <Dependent Role="Uplatnica">
-              <PropertyRef Name="ID_Uplate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="PostNet">
-          <Key>
-            <PropertyRef Name="ID_Uplate" />
-          </Key>
-          <Property Name="ID_Uplate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="FinansijskaUsluga" Relationship="PostaDb.PostNetFinansijskaUsluga" FromRole="PostNet" ToRole="FinansijskaUsluga" />
+        <EntityType Name="PostNet" BaseType="PostaDb.FinansijskaUsluga">
           <Property Name="BrojTelefona" Type="Int32" Nullable="false" />
           <Property Name="JMBG_Primaoca" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="PostNetFinansijskaUsluga">
-          <End Type="PostaDb.PostNet" Role="PostNet" Multiplicity="0..1" />
-          <End Type="PostaDb.FinansijskaUsluga" Role="FinansijskaUsluga" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="FinansijskaUsluga">
-              <PropertyRef Name="ID_Uplate" />
-            </Principal>
-            <Dependent Role="PostNet">
-              <PropertyRef Name="ID_Uplate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -711,12 +577,17 @@
           <ScalarProperty Name="Prezime" ColumnName="Prezime" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Postari">
-      <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Postar)">
-        <MappingFragment StoreEntitySet="Postari">
+      <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Sluzbenik)">
+        <MappingFragment StoreEntitySet="Radnici_Sluzbenik">
           <ScalarProperty Name="JMBG_Radnika" ColumnName="JMBG_Radnika" />
-          <ScalarProperty Name="PostanskiBroj" ColumnName="PostanskiBroj" />
+          <ScalarProperty Name="PostaPostanskiBroj" ColumnName="PostaPostanskiBroj" />
+          <ScalarProperty Name="Odeljenje" ColumnName="Odeljenje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Postar)">
+        <MappingFragment StoreEntitySet="Radnici_Postar">
+          <ScalarProperty Name="JMBG_Radnika" ColumnName="JMBG_Radnika" />
+          <ScalarProperty Name="PostaPostanskiBroj" ColumnName="PostaPostanskiBroj" />
           <ScalarProperty Name="DeoGrada" ColumnName="DeoGrada" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -728,15 +599,6 @@
           <ScalarProperty Name="Grad" ColumnName="Grad" />
           <ScalarProperty Name="Ulica" ColumnName="Ulica" />
           <ScalarProperty Name="Broj" ColumnName="Broj" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Sluzbenici">
-      <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Sluzbenik)">
-        <MappingFragment StoreEntitySet="Sluzbenici">
-          <ScalarProperty Name="JMBG_Radnika" ColumnName="JMBG_Radnika" />
-          <ScalarProperty Name="PostanskiBroj" ColumnName="PostanskiBroj" />
-          <ScalarProperty Name="Odeljenje" ColumnName="Odeljenje" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -759,18 +621,14 @@
           <ScalarProperty Name="PostanskiBrojOdredista" ColumnName="PostanskiBrojOdredista" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Pakets">
       <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Paket)">
-        <MappingFragment StoreEntitySet="Pakets">
+        <MappingFragment StoreEntitySet="PostanskeUsluge_Paket">
           <ScalarProperty Name="ID_Posiljke" ColumnName="ID_Posiljke" />
           <ScalarProperty Name="Tezina" ColumnName="Tezina" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Pismoes">
       <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Pismo)">
-        <MappingFragment StoreEntitySet="Pismoes">
+        <MappingFragment StoreEntitySet="PostanskeUsluge_Pismo">
           <ScalarProperty Name="ID_Posiljke" ColumnName="ID_Posiljke" />
           <ScalarProperty Name="Preporuceno" ColumnName="Preporuceno" />
         </MappingFragment>
@@ -792,18 +650,14 @@
           <ScalarProperty Name="Iznos" ColumnName="Iznos" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Uplatnicas">
       <EntityTypeMapping TypeName="IsTypeOf(PostaDb.Uplatnica)">
-        <MappingFragment StoreEntitySet="Uplatnicas">
+        <MappingFragment StoreEntitySet="FinansijskaUslugas_Uplatnica">
           <ScalarProperty Name="ID_Uplate" ColumnName="ID_Uplate" />
           <ScalarProperty Name="BrojRacuna" ColumnName="BrojRacuna" />
         </MappingFragment>
       </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PostNets">
       <EntityTypeMapping TypeName="IsTypeOf(PostaDb.PostNet)">
-        <MappingFragment StoreEntitySet="PostNets">
+        <MappingFragment StoreEntitySet="FinansijskaUslugas_PostNet">
           <ScalarProperty Name="ID_Uplate" ColumnName="ID_Uplate" />
           <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
           <ScalarProperty Name="JMBG_Primaoca" ColumnName="JMBG_Primaoca" />

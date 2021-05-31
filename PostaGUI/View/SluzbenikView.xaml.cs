@@ -46,11 +46,12 @@ namespace PostaGUI.View
                 // When used with Linq to Entities this method
                 // creates entity objects and adds them to the context.
                 _context = new PostaDbContainer();
-                _context.Sluzbenici.Load();
+                _context.Radnici.Load();
+                _context.Radnici_Sluzbenik.Load();
 
                 // After the data is loaded call the DbSet<T>.Local property
                 // to use the DbSet<T> as a binding source.
-                sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                sluzbenikViewSource.Source = _context.Radnici_Sluzbenik.Local;
             }
         }
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
@@ -58,7 +59,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = sluzbenikViewSource.View.CurrentItem as Sluzbenik;
 
-            var radnik = (from c in _context.Sluzbenici
+            var radnik = (from c in _context.Radnici_Sluzbenik
                           where c.JMBG_Radnika == cur.JMBG_Radnika
                           select c).FirstOrDefault();
 
@@ -66,12 +67,12 @@ namespace PostaGUI.View
             {
                 try
                 {
-                    _context.Sluzbenici.Remove(radnik);
+                    _context.Radnici_Sluzbenik.Remove(radnik);
 
                     _context.SaveChanges();
-                    _context.Sluzbenici.Load();
+                    _context.Radnici_Sluzbenik.Load();
 
-                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    sluzbenikViewSource.Source = _context.Radnici_Sluzbenik.Local;
                     sluzbenikViewSource.View.Refresh();
 
 
@@ -91,9 +92,9 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             var cur = sluzbenikViewSource.View.CurrentItem as Sluzbenik;
 
-            var radnik = (from c in _context.Sluzbenici
+            var radnik = (from c in _context.Radnici_Sluzbenik
                           where c.JMBG_Radnika == cur.JMBG_Radnika
-                          select c).FirstOrDefault();
+                         select c).FirstOrDefault() as Sluzbenik;
 
             if (radnik != null)
             {
@@ -101,11 +102,13 @@ namespace PostaGUI.View
                 {
 
                     radnik.Odeljenje = odeljenjeTextBox.Text;
-                    
-                    _context.SaveChanges();
-                    _context.Sluzbenici.Load();
+                    radnik.Ime = imeTextBox.Text;
+                    radnik.Prezime = prezimeTextBox.Text;
 
-                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    _context.SaveChanges();
+                    _context.Radnici_Sluzbenik.Load();
+
+                    sluzbenikViewSource.Source = _context.Radnici_Sluzbenik.Local;
                     sluzbenikViewSource.View.Refresh();
 
 
@@ -130,15 +133,18 @@ namespace PostaGUI.View
             {
                 try
                 {
-
+                    
                     sluzbenik.Odeljenje = odeljenjeTextBox.Text;
                     sluzbenik.JMBG_Radnika =Convert.ToInt32(jMBG_RadnikaTextBox.Text);
-                    sluzbenik.PostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
-                    _context.Sluzbenici.Add(sluzbenik);
-                    _context.SaveChanges();
-                    _context.Sluzbenici.Load();
+                    sluzbenik.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
+                    sluzbenik.Ime = imeTextBox.Text;
+                    sluzbenik.Prezime = prezimeTextBox.Text;
+                    _context.Radnici_Sluzbenik.Add(sluzbenik);
 
-                    sluzbenikViewSource.Source = _context.Sluzbenici.Local;
+                    _context.SaveChanges();
+                    _context.Radnici_Sluzbenik.Load();
+
+                    sluzbenikViewSource.Source = _context.Radnici_Sluzbenik.Local;
                     sluzbenikViewSource.View.Refresh();
 
 

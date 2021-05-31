@@ -12,7 +12,7 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class PostanskaUsluga
+    public abstract partial class PostanskaUsluga
     {
         public int ID_Posiljke { get; set; }
         public int SkladisteId_Skladiste { get; set; }
@@ -32,7 +32,5 @@ namespace DatabaseModel
         public virtual Skladiste Skladiste { get; set; }
         public virtual Sluzbenik Sluzbenik { get; set; }
         public virtual Postar Postar { get; set; }
-        public virtual Paket Paket { get; set; }
-        public virtual Pismo Pismo { get; set; }
     }
 }

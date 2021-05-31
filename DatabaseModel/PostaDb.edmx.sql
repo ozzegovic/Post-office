@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2021 19:02:11
+-- Date Created: 05/31/2021 13:00:08
 -- Generated from EDMX file: C:\Users\maja\Desktop\UNI\4\VIII\baze2\Projekat\PostaGUI\DatabaseModel\PostaDb.edmx
 -- --------------------------------------------------
 
@@ -17,14 +17,8 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PostarRadnik]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Postari] DROP CONSTRAINT [FK_PostarRadnik];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PostaRadnik]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Radnici] DROP CONSTRAINT [FK_PostaRadnik];
-GO
-IF OBJECT_ID(N'[dbo].[FK_RadnikSluzbenik]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sluzbenici] DROP CONSTRAINT [FK_RadnikSluzbenik];
 GO
 IF OBJECT_ID(N'[dbo].[FK_SkladistePosta]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Skladista] DROP CONSTRAINT [FK_SkladistePosta];
@@ -38,20 +32,26 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PostanskaUslugaPostar]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PostanskeUsluge] DROP CONSTRAINT [FK_PostanskaUslugaPostar];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PostanskaUslugaPaket]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pakets] DROP CONSTRAINT [FK_PostanskaUslugaPaket];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PismoPostanskaUsluga]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pismoes] DROP CONSTRAINT [FK_PismoPostanskaUsluga];
-GO
 IF OBJECT_ID(N'[dbo].[FK_FinansijskaUslugaSluzbenik]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[FinansijskaUslugas] DROP CONSTRAINT [FK_FinansijskaUslugaSluzbenik];
 GO
-IF OBJECT_ID(N'[dbo].[FK_FinansijskaUslugaUplatnica]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Uplatnicas] DROP CONSTRAINT [FK_FinansijskaUslugaUplatnica];
+IF OBJECT_ID(N'[dbo].[FK_Sluzbenik_inherits_Radnik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Radnici_Sluzbenik] DROP CONSTRAINT [FK_Sluzbenik_inherits_Radnik];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PostNetFinansijskaUsluga]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PostNets] DROP CONSTRAINT [FK_PostNetFinansijskaUsluga];
+IF OBJECT_ID(N'[dbo].[FK_Postar_inherits_Radnik]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Radnici_Postar] DROP CONSTRAINT [FK_Postar_inherits_Radnik];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Paket_inherits_PostanskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostanskeUsluge_Paket] DROP CONSTRAINT [FK_Paket_inherits_PostanskaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Pismo_inherits_PostanskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PostanskeUsluge_Pismo] DROP CONSTRAINT [FK_Pismo_inherits_PostanskaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_Uplatnica_inherits_FinansijskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FinansijskaUslugas_Uplatnica] DROP CONSTRAINT [FK_Uplatnica_inherits_FinansijskaUsluga];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostNet_inherits_FinansijskaUsluga]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FinansijskaUslugas_PostNet] DROP CONSTRAINT [FK_PostNet_inherits_FinansijskaUsluga];
 GO
 
 -- --------------------------------------------------
@@ -64,32 +64,32 @@ GO
 IF OBJECT_ID(N'[dbo].[Radnici]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Radnici];
 GO
-IF OBJECT_ID(N'[dbo].[Postari]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Postari];
-GO
 IF OBJECT_ID(N'[dbo].[Poste]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Poste];
-GO
-IF OBJECT_ID(N'[dbo].[Sluzbenici]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Sluzbenici];
 GO
 IF OBJECT_ID(N'[dbo].[PostanskeUsluge]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PostanskeUsluge];
 GO
-IF OBJECT_ID(N'[dbo].[Pakets]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Pakets];
-GO
-IF OBJECT_ID(N'[dbo].[Pismoes]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Pismoes];
-GO
 IF OBJECT_ID(N'[dbo].[FinansijskaUslugas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FinansijskaUslugas];
 GO
-IF OBJECT_ID(N'[dbo].[Uplatnicas]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Uplatnicas];
+IF OBJECT_ID(N'[dbo].[Radnici_Sluzbenik]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Radnici_Sluzbenik];
 GO
-IF OBJECT_ID(N'[dbo].[PostNets]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PostNets];
+IF OBJECT_ID(N'[dbo].[Radnici_Postar]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Radnici_Postar];
+GO
+IF OBJECT_ID(N'[dbo].[PostanskeUsluge_Paket]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PostanskeUsluge_Paket];
+GO
+IF OBJECT_ID(N'[dbo].[PostanskeUsluge_Pismo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PostanskeUsluge_Pismo];
+GO
+IF OBJECT_ID(N'[dbo].[FinansijskaUslugas_Uplatnica]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FinansijskaUslugas_Uplatnica];
+GO
+IF OBJECT_ID(N'[dbo].[FinansijskaUslugas_PostNet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FinansijskaUslugas_PostNet];
 GO
 
 -- --------------------------------------------------
@@ -115,28 +115,12 @@ CREATE TABLE [dbo].[Radnici] (
 );
 GO
 
--- Creating table 'Postari'
-CREATE TABLE [dbo].[Postari] (
-    [JMBG_Radnika] int  NOT NULL,
-    [PostanskiBroj] decimal(18,0)  NOT NULL,
-    [DeoGrada] nvarchar(max)  NOT NULL
-);
-GO
-
 -- Creating table 'Poste'
 CREATE TABLE [dbo].[Poste] (
     [PostanskiBroj] decimal(18,0)  NOT NULL,
     [Grad] nvarchar(max)  NOT NULL,
     [Ulica] nvarchar(max)  NOT NULL,
     [Broj] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'Sluzbenici'
-CREATE TABLE [dbo].[Sluzbenici] (
-    [JMBG_Radnika] int  NOT NULL,
-    [PostanskiBroj] decimal(18,0)  NOT NULL,
-    [Odeljenje] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -159,20 +143,6 @@ CREATE TABLE [dbo].[PostanskeUsluge] (
 );
 GO
 
--- Creating table 'Pakets'
-CREATE TABLE [dbo].[Pakets] (
-    [ID_Posiljke] int IDENTITY(1,1) NOT NULL,
-    [Tezina] float  NOT NULL
-);
-GO
-
--- Creating table 'Pismoes'
-CREATE TABLE [dbo].[Pismoes] (
-    [ID_Posiljke] int IDENTITY(1,1) NOT NULL,
-    [Preporuceno] bit  NOT NULL
-);
-GO
-
 -- Creating table 'FinansijskaUslugas'
 CREATE TABLE [dbo].[FinansijskaUslugas] (
     [ID_Uplate] int IDENTITY(1,1) NOT NULL,
@@ -189,18 +159,48 @@ CREATE TABLE [dbo].[FinansijskaUslugas] (
 );
 GO
 
--- Creating table 'Uplatnicas'
-CREATE TABLE [dbo].[Uplatnicas] (
-    [ID_Uplate] int IDENTITY(1,1) NOT NULL,
-    [BrojRacuna] bigint  NOT NULL
+-- Creating table 'Radnici_Sluzbenik'
+CREATE TABLE [dbo].[Radnici_Sluzbenik] (
+    [Odeljenje] nvarchar(max)  NOT NULL,
+    [JMBG_Radnika] int  NOT NULL,
+    [PostaPostanskiBroj] decimal(18,0)  NOT NULL
 );
 GO
 
--- Creating table 'PostNets'
-CREATE TABLE [dbo].[PostNets] (
-    [ID_Uplate] int IDENTITY(1,1) NOT NULL,
+-- Creating table 'Radnici_Postar'
+CREATE TABLE [dbo].[Radnici_Postar] (
+    [DeoGrada] nvarchar(max)  NOT NULL,
+    [JMBG_Radnika] int  NOT NULL,
+    [PostaPostanskiBroj] decimal(18,0)  NOT NULL
+);
+GO
+
+-- Creating table 'PostanskeUsluge_Paket'
+CREATE TABLE [dbo].[PostanskeUsluge_Paket] (
+    [Tezina] float  NOT NULL,
+    [ID_Posiljke] int  NOT NULL
+);
+GO
+
+-- Creating table 'PostanskeUsluge_Pismo'
+CREATE TABLE [dbo].[PostanskeUsluge_Pismo] (
+    [Preporuceno] bit  NOT NULL,
+    [ID_Posiljke] int  NOT NULL
+);
+GO
+
+-- Creating table 'FinansijskaUslugas_Uplatnica'
+CREATE TABLE [dbo].[FinansijskaUslugas_Uplatnica] (
+    [BrojRacuna] bigint  NOT NULL,
+    [ID_Uplate] int  NOT NULL
+);
+GO
+
+-- Creating table 'FinansijskaUslugas_PostNet'
+CREATE TABLE [dbo].[FinansijskaUslugas_PostNet] (
     [BrojTelefona] int  NOT NULL,
-    [JMBG_Primaoca] int  NOT NULL
+    [JMBG_Primaoca] int  NOT NULL,
+    [ID_Uplate] int  NOT NULL
 );
 GO
 
@@ -220,39 +220,15 @@ ADD CONSTRAINT [PK_Radnici]
     PRIMARY KEY CLUSTERED ([JMBG_Radnika], [PostaPostanskiBroj] ASC);
 GO
 
--- Creating primary key on [JMBG_Radnika], [PostanskiBroj] in table 'Postari'
-ALTER TABLE [dbo].[Postari]
-ADD CONSTRAINT [PK_Postari]
-    PRIMARY KEY CLUSTERED ([JMBG_Radnika], [PostanskiBroj] ASC);
-GO
-
 -- Creating primary key on [PostanskiBroj] in table 'Poste'
 ALTER TABLE [dbo].[Poste]
 ADD CONSTRAINT [PK_Poste]
     PRIMARY KEY CLUSTERED ([PostanskiBroj] ASC);
 GO
 
--- Creating primary key on [JMBG_Radnika], [PostanskiBroj] in table 'Sluzbenici'
-ALTER TABLE [dbo].[Sluzbenici]
-ADD CONSTRAINT [PK_Sluzbenici]
-    PRIMARY KEY CLUSTERED ([JMBG_Radnika], [PostanskiBroj] ASC);
-GO
-
 -- Creating primary key on [ID_Posiljke] in table 'PostanskeUsluge'
 ALTER TABLE [dbo].[PostanskeUsluge]
 ADD CONSTRAINT [PK_PostanskeUsluge]
-    PRIMARY KEY CLUSTERED ([ID_Posiljke] ASC);
-GO
-
--- Creating primary key on [ID_Posiljke] in table 'Pakets'
-ALTER TABLE [dbo].[Pakets]
-ADD CONSTRAINT [PK_Pakets]
-    PRIMARY KEY CLUSTERED ([ID_Posiljke] ASC);
-GO
-
--- Creating primary key on [ID_Posiljke] in table 'Pismoes'
-ALTER TABLE [dbo].[Pismoes]
-ADD CONSTRAINT [PK_Pismoes]
     PRIMARY KEY CLUSTERED ([ID_Posiljke] ASC);
 GO
 
@@ -262,30 +238,45 @@ ADD CONSTRAINT [PK_FinansijskaUslugas]
     PRIMARY KEY CLUSTERED ([ID_Uplate] ASC);
 GO
 
--- Creating primary key on [ID_Uplate] in table 'Uplatnicas'
-ALTER TABLE [dbo].[Uplatnicas]
-ADD CONSTRAINT [PK_Uplatnicas]
+-- Creating primary key on [JMBG_Radnika], [PostaPostanskiBroj] in table 'Radnici_Sluzbenik'
+ALTER TABLE [dbo].[Radnici_Sluzbenik]
+ADD CONSTRAINT [PK_Radnici_Sluzbenik]
+    PRIMARY KEY CLUSTERED ([JMBG_Radnika], [PostaPostanskiBroj] ASC);
+GO
+
+-- Creating primary key on [JMBG_Radnika], [PostaPostanskiBroj] in table 'Radnici_Postar'
+ALTER TABLE [dbo].[Radnici_Postar]
+ADD CONSTRAINT [PK_Radnici_Postar]
+    PRIMARY KEY CLUSTERED ([JMBG_Radnika], [PostaPostanskiBroj] ASC);
+GO
+
+-- Creating primary key on [ID_Posiljke] in table 'PostanskeUsluge_Paket'
+ALTER TABLE [dbo].[PostanskeUsluge_Paket]
+ADD CONSTRAINT [PK_PostanskeUsluge_Paket]
+    PRIMARY KEY CLUSTERED ([ID_Posiljke] ASC);
+GO
+
+-- Creating primary key on [ID_Posiljke] in table 'PostanskeUsluge_Pismo'
+ALTER TABLE [dbo].[PostanskeUsluge_Pismo]
+ADD CONSTRAINT [PK_PostanskeUsluge_Pismo]
+    PRIMARY KEY CLUSTERED ([ID_Posiljke] ASC);
+GO
+
+-- Creating primary key on [ID_Uplate] in table 'FinansijskaUslugas_Uplatnica'
+ALTER TABLE [dbo].[FinansijskaUslugas_Uplatnica]
+ADD CONSTRAINT [PK_FinansijskaUslugas_Uplatnica]
     PRIMARY KEY CLUSTERED ([ID_Uplate] ASC);
 GO
 
--- Creating primary key on [ID_Uplate] in table 'PostNets'
-ALTER TABLE [dbo].[PostNets]
-ADD CONSTRAINT [PK_PostNets]
+-- Creating primary key on [ID_Uplate] in table 'FinansijskaUslugas_PostNet'
+ALTER TABLE [dbo].[FinansijskaUslugas_PostNet]
+ADD CONSTRAINT [PK_FinansijskaUslugas_PostNet]
     PRIMARY KEY CLUSTERED ([ID_Uplate] ASC);
 GO
 
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [JMBG_Radnika], [PostanskiBroj] in table 'Postari'
-ALTER TABLE [dbo].[Postari]
-ADD CONSTRAINT [FK_PostarRadnik]
-    FOREIGN KEY ([JMBG_Radnika], [PostanskiBroj])
-    REFERENCES [dbo].[Radnici]
-        ([JMBG_Radnika], [PostaPostanskiBroj])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating foreign key on [PostaPostanskiBroj] in table 'Radnici'
 ALTER TABLE [dbo].[Radnici]
@@ -300,15 +291,6 @@ GO
 CREATE INDEX [IX_FK_PostaRadnik]
 ON [dbo].[Radnici]
     ([PostaPostanskiBroj]);
-GO
-
--- Creating foreign key on [JMBG_Radnika], [PostanskiBroj] in table 'Sluzbenici'
-ALTER TABLE [dbo].[Sluzbenici]
-ADD CONSTRAINT [FK_RadnikSluzbenik]
-    FOREIGN KEY ([JMBG_Radnika], [PostanskiBroj])
-    REFERENCES [dbo].[Radnici]
-        ([JMBG_Radnika], [PostaPostanskiBroj])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating foreign key on [PostaPostanskiBroj] in table 'Skladista'
@@ -345,8 +327,8 @@ GO
 ALTER TABLE [dbo].[PostanskeUsluge]
 ADD CONSTRAINT [FK_PostanskaUslugaSluzbenik]
     FOREIGN KEY ([SluzbenikJMBG_Radnika], [SluzbenikPostanskiBroj])
-    REFERENCES [dbo].[Sluzbenici]
-        ([JMBG_Radnika], [PostanskiBroj])
+    REFERENCES [dbo].[Radnici_Sluzbenik]
+        ([JMBG_Radnika], [PostaPostanskiBroj])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
@@ -360,8 +342,8 @@ GO
 ALTER TABLE [dbo].[PostanskeUsluge]
 ADD CONSTRAINT [FK_PostanskaUslugaPostar]
     FOREIGN KEY ([PostarJMBG_Radnika], [PostarPostanskiBroj])
-    REFERENCES [dbo].[Postari]
-        ([JMBG_Radnika], [PostanskiBroj])
+    REFERENCES [dbo].[Radnici_Postar]
+        ([JMBG_Radnika], [PostaPostanskiBroj])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
@@ -371,30 +353,12 @@ ON [dbo].[PostanskeUsluge]
     ([PostarJMBG_Radnika], [PostarPostanskiBroj]);
 GO
 
--- Creating foreign key on [ID_Posiljke] in table 'Pakets'
-ALTER TABLE [dbo].[Pakets]
-ADD CONSTRAINT [FK_PostanskaUslugaPaket]
-    FOREIGN KEY ([ID_Posiljke])
-    REFERENCES [dbo].[PostanskeUsluge]
-        ([ID_Posiljke])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [ID_Posiljke] in table 'Pismoes'
-ALTER TABLE [dbo].[Pismoes]
-ADD CONSTRAINT [FK_PismoPostanskaUsluga]
-    FOREIGN KEY ([ID_Posiljke])
-    REFERENCES [dbo].[PostanskeUsluge]
-        ([ID_Posiljke])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
 -- Creating foreign key on [SluzbenikJMBG_Radnika], [SluzbenikPostanskiBroj] in table 'FinansijskaUslugas'
 ALTER TABLE [dbo].[FinansijskaUslugas]
 ADD CONSTRAINT [FK_FinansijskaUslugaSluzbenik]
     FOREIGN KEY ([SluzbenikJMBG_Radnika], [SluzbenikPostanskiBroj])
-    REFERENCES [dbo].[Sluzbenici]
-        ([JMBG_Radnika], [PostanskiBroj])
+    REFERENCES [dbo].[Radnici_Sluzbenik]
+        ([JMBG_Radnika], [PostaPostanskiBroj])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
@@ -404,22 +368,58 @@ ON [dbo].[FinansijskaUslugas]
     ([SluzbenikJMBG_Radnika], [SluzbenikPostanskiBroj]);
 GO
 
--- Creating foreign key on [ID_Uplate] in table 'Uplatnicas'
-ALTER TABLE [dbo].[Uplatnicas]
-ADD CONSTRAINT [FK_FinansijskaUslugaUplatnica]
-    FOREIGN KEY ([ID_Uplate])
-    REFERENCES [dbo].[FinansijskaUslugas]
-        ([ID_Uplate])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- Creating foreign key on [JMBG_Radnika], [PostaPostanskiBroj] in table 'Radnici_Sluzbenik'
+ALTER TABLE [dbo].[Radnici_Sluzbenik]
+ADD CONSTRAINT [FK_Sluzbenik_inherits_Radnik]
+    FOREIGN KEY ([JMBG_Radnika], [PostaPostanskiBroj])
+    REFERENCES [dbo].[Radnici]
+        ([JMBG_Radnika], [PostaPostanskiBroj])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [ID_Uplate] in table 'PostNets'
-ALTER TABLE [dbo].[PostNets]
-ADD CONSTRAINT [FK_PostNetFinansijskaUsluga]
+-- Creating foreign key on [JMBG_Radnika], [PostaPostanskiBroj] in table 'Radnici_Postar'
+ALTER TABLE [dbo].[Radnici_Postar]
+ADD CONSTRAINT [FK_Postar_inherits_Radnik]
+    FOREIGN KEY ([JMBG_Radnika], [PostaPostanskiBroj])
+    REFERENCES [dbo].[Radnici]
+        ([JMBG_Radnika], [PostaPostanskiBroj])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Posiljke] in table 'PostanskeUsluge_Paket'
+ALTER TABLE [dbo].[PostanskeUsluge_Paket]
+ADD CONSTRAINT [FK_Paket_inherits_PostanskaUsluga]
+    FOREIGN KEY ([ID_Posiljke])
+    REFERENCES [dbo].[PostanskeUsluge]
+        ([ID_Posiljke])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Posiljke] in table 'PostanskeUsluge_Pismo'
+ALTER TABLE [dbo].[PostanskeUsluge_Pismo]
+ADD CONSTRAINT [FK_Pismo_inherits_PostanskaUsluga]
+    FOREIGN KEY ([ID_Posiljke])
+    REFERENCES [dbo].[PostanskeUsluge]
+        ([ID_Posiljke])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Uplate] in table 'FinansijskaUslugas_Uplatnica'
+ALTER TABLE [dbo].[FinansijskaUslugas_Uplatnica]
+ADD CONSTRAINT [FK_Uplatnica_inherits_FinansijskaUsluga]
     FOREIGN KEY ([ID_Uplate])
     REFERENCES [dbo].[FinansijskaUslugas]
         ([ID_Uplate])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID_Uplate] in table 'FinansijskaUslugas_PostNet'
+ALTER TABLE [dbo].[FinansijskaUslugas_PostNet]
+ADD CONSTRAINT [FK_PostNet_inherits_FinansijskaUsluga]
+    FOREIGN KEY ([ID_Uplate])
+    REFERENCES [dbo].[FinansijskaUslugas]
+        ([ID_Uplate])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- --------------------------------------------------

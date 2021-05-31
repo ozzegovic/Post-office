@@ -107,6 +107,8 @@ namespace PostaGUI.View
                     finUsluga.Grad = gradTextBox.Text;
                     finUsluga.Ulica = ulicaTextBox.Text;
                     finUsluga.Broj = brojTextBox.Text;
+                    finUsluga.SluzbenikJMBG_Radnika =Convert.ToInt32( sluzbenikJMBG_RadnikaTextBox.Text);
+                    finUsluga.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
 
                     _context.SaveChanges();
                     _context.FinansijskaUslugas.Load();
@@ -132,39 +134,39 @@ namespace PostaGUI.View
 
             _context = new PostaDbContainer();
 
-            FinansijskaUsluga finUsluga = new FinansijskaUsluga();
+            //FinansijskaUsluga finUsluga = new FinansijskaUsluga();
 
-            if (finUsluga != null)
-            {
-                try
-                {
+            //if (finUsluga != null)
+            //{
+            //    try
+            //    {
                     
-                    finUsluga.Iznos = Convert.ToDouble(iznosTextBox.Text);
-                    finUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
-                    finUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
-                    finUsluga.PrimalacIme = primalacImeTextBox.Text;
-                    finUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
-                    finUsluga.Grad = gradTextBox.Text;
-                    finUsluga.Ulica = ulicaTextBox.Text;
-                    finUsluga.Broj = brojTextBox.Text;
+            //        finUsluga.Iznos = Convert.ToDouble(iznosTextBox.Text);
+            //        finUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
+            //        finUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
+            //        finUsluga.PrimalacIme = primalacImeTextBox.Text;
+            //        finUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
+            //        finUsluga.Grad = gradTextBox.Text;
+            //        finUsluga.Ulica = ulicaTextBox.Text;
+            //        finUsluga.Broj = brojTextBox.Text;
 
-                    _context.FinansijskaUslugas.Add(finUsluga);
-                    _context.SaveChanges();
-                    _context.FinansijskaUslugas.Load();
+            //        _context.FinansijskaUslugas.Add(finUsluga);
+            //        _context.SaveChanges();
+            //        _context.FinansijskaUslugas.Load();
 
-                    finansijskaUslugaViewSource.Source = _context.FinansijskaUslugas.Local;
-                    finansijskaUslugaViewSource.View.Refresh();
+            //        finansijskaUslugaViewSource.Source = _context.FinansijskaUslugas.Local;
+            //        finansijskaUslugaViewSource.View.Refresh();
 
 
-                }
-                catch (Exception ex)
-                {
+            //    }
+            //    catch (Exception ex)
+            //    {
 
-                    MessageBox.Show("Trenutno nije moguce dodati finansijsku uslugu.", "Error");
-                    return;
-                }
+            //        MessageBox.Show("Trenutno nije moguce dodati finansijsku uslugu.", "Error");
+            //        return;
+            //    }
 
-            }
+            //}
 
 
         }

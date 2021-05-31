@@ -27,14 +27,18 @@ namespace DatabaseModel
     
         public virtual DbSet<Skladiste> Skladista { get; set; }
         public virtual DbSet<Radnik> Radnici { get; set; }
-        public virtual DbSet<Postar> Postari { get; set; }
+        public virtual DbSet<Sluzbenik> Radnici_Sluzbenik { get; set; }
+        public virtual DbSet<Postar> Radnici_Postar { get; set; }
         public virtual DbSet<Posta> Poste { get; set; }
-        public virtual DbSet<Sluzbenik> Sluzbenici { get; set; }
         public virtual DbSet<PostanskaUsluga> PostanskeUsluge { get; set; }
-        public virtual DbSet<Paket> Pakets { get; set; }
-        public virtual DbSet<Pismo> Pismoes { get; set; }
+        public virtual DbSet<Paket> PostanskeUsluge_Paket { get; set; }
+        public virtual DbSet<Pismo> PostanskeUsluge_Pismo { get; set; }
+
         public virtual DbSet<FinansijskaUsluga> FinansijskaUslugas { get; set; }
-        public virtual DbSet<Uplatnica> Uplatnicas { get; set; }
-        public virtual DbSet<PostNet> PostNets { get; set; }
+        public virtual DbSet<PostNet> FinansijskaUslugas_PostNet { get; set; }
+        public virtual DbSet<Uplatnica> FinansijskaUslugas_Uplatnica { get; set; }
+
+
+
     }
 }

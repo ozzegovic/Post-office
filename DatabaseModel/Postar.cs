@@ -12,7 +12,7 @@ namespace DatabaseModel
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Postar
+    public partial class Postar : Radnik
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Postar()
@@ -20,11 +20,8 @@ namespace DatabaseModel
             this.PostanskaUslugas = new ObservableCollection<PostanskaUsluga>();
         }
     
-        public int JMBG_Radnika { get; set; }
-        public decimal PostanskiBroj { get; set; }
         public string DeoGrada { get; set; }
     
-        public virtual Radnik Radnik { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<PostanskaUsluga> PostanskaUslugas { get; set; }
     }
