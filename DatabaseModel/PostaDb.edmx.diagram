@@ -20,17 +20,13 @@
         <EntityTypeShape EntityType="PostaDb.Pismo" Width="1.5" PointX="10.875" PointY="5.5" />
         <EntityTypeShape EntityType="PostaDb.FinansijskaUsluga" Width="1.5" PointX="4.375" PointY="9.375" />
         <AssociationConnector Association="PostaDb.FinansijskaUslugaSluzbenik" />
-        <EntityTypeShape EntityType="PostaDb.Uplatnica" Width="1.5" PointX="11.375" PointY="10.5" />
-        <EntityTypeShape EntityType="PostaDb.PostNet" Width="1.5" PointX="11.375" PointY="10.375" />
+        <EntityTypeShape EntityType="PostaDb.Uplatnica" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="PostaDb.PostNet" Width="1.5" PointX="10.75" PointY="8.375" />
         <InheritanceConnector EntityType="PostaDb.Sluzbenik" />
         <InheritanceConnector EntityType="PostaDb.Postar" />
         <InheritanceConnector EntityType="PostaDb.Pismo" />
         <InheritanceConnector EntityType="PostaDb.Paket" />
-        <InheritanceConnector EntityType="PostaDb.Uplatnica" ManuallyRouted="true" >
-          <ConnectorPoint PointX="5.875" PointY="10.462757968489731" />
-          <ConnectorPoint PointX="5.99875" PointY="10.462757968489731" />
-          <ConnectorPoint PointX="5.99875" PointY="11.105540364583334" />
-          <ConnectorPoint PointX="11.375" PointY="11.105540364583334" />
+        <InheritanceConnector EntityType="PostaDb.Uplatnica" ManuallyRouted="false" >
         </InheritanceConnector>
         <InheritanceConnector EntityType="PostaDb.PostNet" />
       </Diagram>

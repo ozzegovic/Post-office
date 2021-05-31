@@ -105,7 +105,7 @@ namespace PostaGUI.View
                     postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
 
                     postnet.Iznos = Convert.ToDouble(iznosTextBox.Text);
-                    postnet.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    postnet.PosiljalacIme = posiljalacImeTextBox.Text;
                     postnet.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     postnet.PrimalacIme = primalacImeTextBox.Text;
                     postnet.PrimalacPrezime = primalacPrezimeTextBox.Text;
@@ -148,7 +148,7 @@ namespace PostaGUI.View
                     postnet.JMBG_Primaoca = Convert.ToInt32(jMBG_PrimaocaTextBox.Text);
 
                     postnet.Iznos = Convert.ToDouble(iznosTextBox.Text);
-                    postnet.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    postnet.PosiljalacIme = posiljalacImeTextBox.Text;
                     postnet.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     postnet.PrimalacIme = primalacImeTextBox.Text;
                     postnet.PrimalacPrezime = primalacPrezimeTextBox.Text;

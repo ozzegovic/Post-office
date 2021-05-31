@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PostaGUI.View"
              xmlns:DatabaseModel="clr-namespace:DatabaseModel;assembly=DatabaseModel" x:Class="PostaGUI.View.PaketView"
              mc:Ignorable="d" 
-             Width="Auto"  Loaded="UserControl_Loaded" Height="620">
+             Width="Auto"  Loaded="UserControl_Loaded" Height="651.5">
     <UserControl.Resources>
         <CollectionViewSource x:Key="paketViewSource" d:DesignSource="{d:DesignInstance {x:Type DatabaseModel:Paket}, CreateList=True}"/>
         <RoutedUICommand x:Key="DeleteCommand" Text="Izbrisi"/>
@@ -18,9 +18,9 @@
         <CommandBinding Command="{StaticResource UpdateCommand}" Executed="UpdateCommandHandler"/>
         <CommandBinding Command="{StaticResource AddCommand}" Executed="AddCommandHandler"/>
     </UserControl.CommandBindings>
-    <Grid DataContext="{StaticResource paketViewSource}" Margin="0,0,0,-148" Height="598" VerticalAlignment="Top">
+    <Grid DataContext="{StaticResource paketViewSource}" Height="646" VerticalAlignment="Top">
 
-        <DataGrid x:Name="paketDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,477" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="paketDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,10,10,528" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="brojColumn" Width="SizeToHeader" Header="Broj" Binding="{Binding Broj}"/>
                 <DataGridTextColumn x:Name="gradColumn" Width="SizeToHeader" Header="Grad" Binding="{Binding Grad}"/>
@@ -91,8 +91,8 @@
             <TextBox x:Name="sluzbenikPostanskiBrojTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="12" Text="{Binding SluzbenikPostanskiBroj, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Ulica:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="13" VerticalAlignment="Center"/>
             <TextBox x:Name="ulicaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="13" Text="{Binding Ulica, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Tezina:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="tezinaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Tezina, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Tezina:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="14" VerticalAlignment="Center"/>
+            <TextBox x:Name="tezinaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="14" Text="{Binding Tezina, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
         <StackPanel Orientation="Vertical" Margin="289,147,1010,0" Height="58" VerticalAlignment="Top" DataContext="{StaticResource paketViewSource}">
 

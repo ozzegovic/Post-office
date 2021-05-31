@@ -102,7 +102,7 @@ namespace PostaGUI.View
                 {
                     uplatnica.BrojRacuna = Convert.ToInt32(brojRacunaTextBox.Text);
                     uplatnica.Iznos = Convert.ToDouble(iznosTextBox.Text);
-                    uplatnica.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    uplatnica.PosiljalacIme = posiljalacImeTextBox.Text;
                     uplatnica.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     uplatnica.PrimalacIme = primalacImeTextBox.Text;
                     uplatnica.PrimalacPrezime = primalacPrezimeTextBox.Text;
@@ -141,7 +141,7 @@ namespace PostaGUI.View
                     uplatnica.BrojRacuna = Convert.ToInt32(brojRacunaTextBox.Text);
 
                     uplatnica.Iznos = Convert.ToDouble(iznosTextBox.Text);
-                    uplatnica.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    uplatnica.PosiljalacIme = posiljalacImeTextBox.Text;
                     uplatnica.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     uplatnica.PrimalacIme = primalacImeTextBox.Text;
                     uplatnica.PrimalacPrezime = primalacPrezimeTextBox.Text;
@@ -151,6 +151,7 @@ namespace PostaGUI.View
                     uplatnica.SluzbenikJMBG_Radnika = Convert.ToInt32(sluzbenikJMBG_RadnikaTextBox.Text);
                     uplatnica.SluzbenikPostanskiBroj = Convert.ToInt32(sluzbenikPostanskiBrojTextBox.Text);
 
+                    _context.FinansijskaUslugas_Uplatnica.Add(uplatnica);
                     _context.SaveChanges();
                     _context.FinansijskaUslugas_Uplatnica.Load();
 
@@ -162,7 +163,7 @@ namespace PostaGUI.View
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Trenutno nije moguce dodati uplatnicu.", "Error");
+                    MessageBox.Show("Trenutno nije moguce dodati uplatnicu. " + ex.InnerException.InnerException.Message, "Error");
                     return;
                 }
 
