@@ -78,7 +78,7 @@
         </Grid>
         <StackPanel Orientation="Vertical" Margin="289,159,528,0" Height="58" VerticalAlignment="Top" >
 
-            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" />
+            <Button Name="btnAdd" Content="Dodaj" Command="{StaticResource AddCommand}" FontSize="11" Width="80" IsEnabled="False"/>
             <Button Name="btnUpdate" Content="Izmeni" Command="{StaticResource UpdateCommand}" FontSize="11" Width="80"/>
             <Button Content="Izbrisi" Name="btnDelete" Command="{StaticResource DeleteCommand}" FontSize="11" Width="80"/>
         </StackPanel>

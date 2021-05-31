@@ -132,7 +132,7 @@ namespace PostaGUI.View
         private void AddCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
 
-            _context = new PostaDbContainer();
+            //_context = new PostaDbContainer();
 
             //FinansijskaUsluga finUsluga = new FinansijskaUsluga();
 

@@ -147,7 +147,7 @@ namespace PostaGUI.View
                 {
                     pismo.Preporuceno = preporucenoCheckBox.IsChecked ?? false;
                     pismo.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    pismo.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    pismo.PosiljalacIme = posiljalacImeTextBox.Text;
                     pismo.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     pismo.PrimalacIme = primalacImeTextBox.Text;
                     pismo.PrimalacPrezime = primalacPrezimeTextBox.Text;
