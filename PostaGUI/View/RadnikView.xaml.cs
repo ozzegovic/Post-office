@@ -56,17 +56,16 @@ namespace PostaGUI.View
         private void DeleteCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             _context = new PostaDbContainer();
-            var cur = radnikViewSource.View.CurrentItem as Sluzbenik;
+            var cur = radnikViewSource.View.CurrentItem as Radnik;
 
             var radnik = (from c in _context.Radnici
-                         where c.JMBG_Radnika == cur.JMBG_Radnika
-                          select c).FirstOrDefault() as Sluzbenik;
+                          where (c.JMBG_Radnika == cur.JMBG_Radnika)
+                          select c).FirstOrDefault();
 
             if (radnik != null)
             {
                 try
                 {
-                    _context.Radnici_Sluzbenik.Remove(radnik);
                     _context.Radnici.Remove(radnik);
 
                     _context.SaveChanges();
@@ -93,7 +92,7 @@ namespace PostaGUI.View
             var cur = radnikViewSource.View.CurrentItem as Radnik;
 
             var radnik = (from c in _context.Radnici
-                         where c.JMBG_Radnika == cur.JMBG_Radnika
+                         where (c.JMBG_Radnika == cur.JMBG_Radnika)
                           select c).FirstOrDefault();
 
             if (radnik != null)
