@@ -95,7 +95,7 @@ namespace PostaGUI.View
                              where c.ID_Uplate == cur.ID_Uplate
                              select c).FirstOrDefault();
 
-            if (finUsluga != null)
+            if (finUsluga != null && Validacija())
             {
                 try
                 {
@@ -169,6 +169,76 @@ namespace PostaGUI.View
             //}
 
 
+        }
+
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+            if (Double.Parse(iznosTextBox.Text) <= 0)
+            {
+                message += "Iznos mora biti broj veci od 0.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(posiljalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(posiljalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(primalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime primaoca.";
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(primalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime primaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(gradTextBox.Text))
+            {
+                message += "Morate uneti grad.";
+
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(ulicaTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ulicu.";
+
+
+            }
+            if (String.IsNullOrEmpty(brojTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti broj.";
+
+            }
+            if (Int32.Parse(sluzbenikJMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg sluzbenika.";
+
+            }
+            if (Int32.Parse(sluzbenikPostanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj sluzbenika.";
+
+            }
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+            return result;
         }
 
     }

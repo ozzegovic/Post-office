@@ -96,7 +96,7 @@ namespace PostaGUI.View
                           where c.JMBG_Radnika == cur.JMBG_Radnika
                          select c).FirstOrDefault() as Sluzbenik;
 
-            if (radnik != null)
+            if (radnik != null && Validacija())
             {
                 try
                 {
@@ -129,13 +129,12 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
 
             Sluzbenik sluzbenik = new Sluzbenik();
-            if (sluzbenik != null)
+            if (sluzbenik != null && Validacija())
             {
                 try
                 {
                     
                     sluzbenik.Odeljenje = odeljenjeTextBox.Text;
-                    sluzbenik.JMBG_Radnika =Convert.ToInt32(jMBG_RadnikaTextBox.Text);
                     sluzbenik.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
                     sluzbenik.Ime = imeTextBox.Text;
                     sluzbenik.Prezime = prezimeTextBox.Text;
@@ -159,6 +158,51 @@ namespace PostaGUI.View
             }
 
 
+        }
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+            if (String.IsNullOrEmpty(odeljenjeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti naziv odeljenja.";
+
+            }
+
+            if (String.IsNullOrEmpty(imeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ime sluzbenika.";
+
+
+            }
+            if (String.IsNullOrEmpty(prezimeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti prezime sluzbenika.";
+
+            }
+            if (Int32.Parse(jMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg sluzbenika.";
+
+            }
+            if (Int32.Parse(postanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj poste u kojoj sluzbenik radi.";
+
+            }
+
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+            return result;
         }
     }
 }

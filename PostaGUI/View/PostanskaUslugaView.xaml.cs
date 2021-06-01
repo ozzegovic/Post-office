@@ -97,7 +97,7 @@ namespace PostaGUI.View
                                    where c.ID_Posiljke == cur.ID_Posiljke
                                    select c).FirstOrDefault();
 
-            if (postanskaUsluga != null)
+            if (postanskaUsluga != null && Validacija())
             {
                 try
                 {
@@ -169,6 +169,99 @@ namespace PostaGUI.View
 
             //}
 
+        }
+
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+
+       
+            if (Int32.Parse(postanskiBrojOdredistaTextBox.Text) <= 0)
+            {
+                message += "Morate uneti validan postanski broj odredista.";
+                result = false;
+            }
+                   
+            if (String.IsNullOrEmpty(posiljalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(posiljalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(primalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime primaoca.";
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(primalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime primaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(gradTextBox.Text))
+            {
+                message += "Morate uneti grad.";
+
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(ulicaTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ulicu.";
+
+
+            }
+            if (String.IsNullOrEmpty(brojTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti broj.";
+
+            }
+            if (Int32.Parse(sluzbenikJMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg sluzbenika.";
+
+            }
+            if (Int32.Parse(sluzbenikPostanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj sluzbenika.";
+
+            }
+
+            if (Int32.Parse(postarJMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg postara.";
+
+            }
+            if (Int32.Parse(postarPostanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj postara.";
+
+            }
+            if (Int32.Parse(skladisteId_SkladisteTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan id skladista.";
+
+            }
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+            return result;
         }
     }
 }

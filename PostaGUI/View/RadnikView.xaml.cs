@@ -59,10 +59,10 @@ namespace PostaGUI.View
             var cur = radnikViewSource.View.CurrentItem as Radnik;
 
             var radnik = (from c in _context.Radnici
-                          where (c.JMBG_Radnika == cur.JMBG_Radnika)
+                          where ((c.JMBG_Radnika == cur.JMBG_Radnika) && (c.PostaPostanskiBroj == cur.PostaPostanskiBroj))
                           select c).FirstOrDefault();
 
-            if (radnik != null)
+            if (radnik != null && Validacija())
             {
                 try
                 {
@@ -92,10 +92,10 @@ namespace PostaGUI.View
             var cur = radnikViewSource.View.CurrentItem as Radnik;
 
             var radnik = (from c in _context.Radnici
-                         where (c.JMBG_Radnika == cur.JMBG_Radnika)
+                         where ((c.JMBG_Radnika == cur.JMBG_Radnika) && (c.PostaPostanskiBroj == cur.PostaPostanskiBroj))
                           select c).FirstOrDefault();
 
-            if (radnik != null)
+            if (radnik != null && Validacija())
             {
                 try
                 {
@@ -157,6 +157,46 @@ namespace PostaGUI.View
             //}
 
 
+        }
+
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+           
+            if (String.IsNullOrEmpty(imeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ime radnika.";
+
+
+            }
+            if (String.IsNullOrEmpty(prezimeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti prezime radnika.";
+
+            }
+            if (Int32.Parse(jMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg radnika.";
+
+            }
+            if (Int32.Parse(postaPostanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj poste.";
+
+            }
+
+           
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+            return result;
         }
     }
 }

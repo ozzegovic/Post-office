@@ -95,7 +95,7 @@ namespace PostaGUI.View
                           where c.JMBG_Radnika == cur.JMBG_Radnika
                           select c).FirstOrDefault();
 
-            if (postar != null)
+            if (postar != null && Validacija())
             {
                 try
                 {
@@ -103,7 +103,6 @@ namespace PostaGUI.View
                     postar.DeoGrada = deoGradaTextBox.Text;
                     postar.Ime = imeTextBox.Text;
                     postar.Prezime = prezimeTextBox.Text;
-                    postar.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
                     postar.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
 
                     _context.SaveChanges();
@@ -130,13 +129,12 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
 
             Postar postar = new Postar();
-            if (postar != null)
+            if (postar != null && Validacija())
             {
                 try
                 {
 
                     postar.DeoGrada = deoGradaTextBox.Text;
-                    postar.JMBG_Radnika = Convert.ToInt32(jMBG_RadnikaTextBox.Text);
                     postar.PostaPostanskiBroj = Convert.ToInt32(postanskiBrojTextBox.Text);
                     postar.Ime = imeTextBox.Text;
                     postar.Prezime = prezimeTextBox.Text;
@@ -160,6 +158,52 @@ namespace PostaGUI.View
             }
 
 
+        }
+
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+            if (String.IsNullOrEmpty(deoGradaTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti naziv dela grada.";
+
+            }
+
+            if (String.IsNullOrEmpty(imeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ime postara.";
+
+
+            }
+            if (String.IsNullOrEmpty(prezimeTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti prezime postara.";
+
+            }
+            if (Int32.Parse(jMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg radnika.";
+
+            }
+            if (Int32.Parse(postanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj poste u kojoj postar radi.";
+
+            }
+
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+            return result;
         }
     }
 }

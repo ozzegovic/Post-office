@@ -97,7 +97,7 @@ namespace PostaGUI.View
                          where c.PostanskiBroj == cur.PostanskiBroj
                          select c).FirstOrDefault();
 
-            if (posta != null)
+            if (posta != null && Validacija())
             {
                 try
                 {
@@ -130,7 +130,7 @@ namespace PostaGUI.View
 
             Posta posta = new Posta();
 
-            if (posta != null)
+            if (posta != null && Validacija())
             {
                 try
                 {
@@ -156,6 +156,46 @@ namespace PostaGUI.View
                 }
 
             }
+        }
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+            if (String.IsNullOrEmpty(gradTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti naziv  grada.";
+
+            }
+
+            if (String.IsNullOrEmpty(ulicaTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ulicu.";
+
+
+            }
+            if (String.IsNullOrEmpty(brojTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti broj.";
+
+            }
+          
+            if (Int32.Parse(postanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj poste.";
+
+            }
+
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+
+            return result;
         }
     }
 }

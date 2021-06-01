@@ -96,7 +96,7 @@ namespace PostaGUI.View
                            where c.ID_Uplate == cur.ID_Uplate
                            select c).FirstOrDefault();
 
-            if (postnet != null)
+            if (postnet != null && Validacija())
             {
                 try
                 {
@@ -127,7 +127,7 @@ namespace PostaGUI.View
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Trenutno nije moguce izmeniti postnet uslugu.", "Error");
+                    MessageBox.Show("Trenutno nije moguce izmeniti postnet uslugu. " + ex.InnerException.InnerException.Message, "Error");
                     return;
                 }
 
@@ -140,7 +140,7 @@ namespace PostaGUI.View
             _context = new PostaDbContainer();
             PostNet postnet = new PostNet();
 
-            if (postnet != null)
+            if (postnet != null && Validacija())
             {
                 try
                 {
@@ -171,12 +171,94 @@ namespace PostaGUI.View
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show("Trenutno nije moguce dodati postnet uslugu.", "Error");
+                    MessageBox.Show("Trenutno nije moguce dodati postnet uslugu. " + ex.InnerException.InnerException.Message, "Error");
                     return;
                 }
 
             }
 
+        }
+
+
+        public bool Validacija()
+        {
+            string message = "";
+            bool result = true;
+            if (Int32.Parse(brojTelefonaTextBox.Text) <= 0)
+            {
+                message += "Broj telefona mora biti broj veci od 0.";
+                result = false;
+            }
+            if (Int32.Parse(jMBG_PrimaocaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti jmbg primaoca.";
+
+            }
+            if (Double.Parse(iznosTextBox.Text) <= 0)
+            {
+                message += "Iznos mora biti broj veci od 0.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(posiljalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(posiljalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime posiljaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(primalacImeTextBox.Text))
+            {
+                message += "Morate uneti ime primaoca.";
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(primalacPrezimeTextBox.Text))
+            {
+                message += "Morate uneti prezime primaoca.";
+                result = false;
+            }
+            if (String.IsNullOrEmpty(gradTextBox.Text))
+            {
+                message += "Morate uneti grad.";
+
+                result = false;
+
+            }
+            if (String.IsNullOrEmpty(ulicaTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti ulicu.";
+
+
+            }
+            if (String.IsNullOrEmpty(brojTextBox.Text))
+            {
+                result = false;
+                message += "Morate uneti broj.";
+
+            }
+            if (Int32.Parse(sluzbenikJMBG_RadnikaTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan jmbg sluzbenika.";
+
+            }
+            if (Int32.Parse(sluzbenikPostanskiBrojTextBox.Text) <= 0)
+            {
+                result = false;
+                message += "Morate uneti ispravan postanski broj sluzbenika.";
+
+            }
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                MessageBox.Show(message, "Error");
+            }
+            return result;
         }
     }
 }
