@@ -105,7 +105,7 @@ namespace PostaGUI.View
                     //nisam sigurna da li sme da se menja odavde bilo sta sto nije samo za pismo, ali mi je lakse da imam ovde
                     // oni polja koja su od postanske usluge se mogu meenjati iz postanske usluge i te promene ce se videti i ovde
                     pismo.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    pismo.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    pismo.PosiljalacIme = posiljalacImeTextBox.Text;
                     pismo.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     pismo.PrimalacIme = primalacImeTextBox.Text;
                     pismo.PrimalacPrezime = primalacPrezimeTextBox.Text;

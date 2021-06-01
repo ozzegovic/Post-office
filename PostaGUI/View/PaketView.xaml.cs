@@ -99,7 +99,7 @@ namespace PostaGUI.View
                 {
                     paket.Tezina = Convert.ToInt32(tezinaTextBox.Text);
                     paket.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    paket.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    paket.PosiljalacIme = posiljalacImeTextBox.Text;
                     paket.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     paket.PrimalacIme = primalacImeTextBox.Text;
                     paket.PrimalacPrezime = primalacPrezimeTextBox.Text;
@@ -141,7 +141,7 @@ namespace PostaGUI.View
                 {
                     paket.Tezina = Convert.ToInt32(tezinaTextBox.Text);
                     paket.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    paket.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    paket.PosiljalacIme = posiljalacImeTextBox.Text;
                     paket.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     paket.PrimalacIme = primalacImeTextBox.Text;
                     paket.PrimalacPrezime = primalacPrezimeTextBox.Text;

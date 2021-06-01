@@ -102,7 +102,7 @@ namespace PostaGUI.View
                 try
                 {
                     postanskaUsluga.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-                    postanskaUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
+                    postanskaUsluga.PosiljalacIme = posiljalacImeTextBox.Text;
                     postanskaUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
                     postanskaUsluga.PrimalacIme = primalacImeTextBox.Text;
                     postanskaUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
@@ -143,7 +143,7 @@ namespace PostaGUI.View
             //    try
             //    {
             //        postanskaUsluga.PostanskiBrojOdredista = Convert.ToInt32(postanskiBrojOdredistaTextBox.Text);
-            //        postanskaUsluga.PosiljalacPrezime = posiljalacImeTextBox.Text;
+            //        postanskaUsluga.PosiljalacIme = posiljalacImeTextBox.Text;
             //        postanskaUsluga.PosiljalacPrezime = posiljalacPrezimeTextBox.Text;
             //        postanskaUsluga.PrimalacIme = primalacImeTextBox.Text;
             //        postanskaUsluga.PrimalacPrezime = primalacPrezimeTextBox.Text;
