@@ -1,0 +1,1 @@
+CREATE INDEX [PB_Odredista] ON [dbo].[PostanskeUsluge] (PostanskiBrojOdredista)
